@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  app:
+    image: kresnasatya/larva-interactions
+    ports:
+      - 8080:80
+    environment:
+      - SSL_MODE=off
+      - AUTORUN_LARAVEL_MIGRATION=true
+      - PHP_POOL_NAME=larva_app
+
+  queue:
+    image: kresnasatya/larva-interactions
+    command: ["su", "webuser", "-c", "php artisan queue:work --tries=3"]
+    environment:
+      - SSL_MODE=off
+      - PHP_POOL_NAME=larva_queue
+
+  horizon:
+    image: kresnasatya/larva-interactions
+    command: ["su", "webuser", "-c", "php artisan horizon"]
+    environment:
+      - SSL_MODE=off
+      - PHP_POOL_NAME=larva_queue
