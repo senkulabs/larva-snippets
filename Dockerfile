@@ -30,7 +30,8 @@ FROM node:20.16.0 as frontend
 
 RUN mkdir -p /app/public
 
-COPY package.json vite.config.js tailwind.config.js postcss.config.js pnpm-lock.yaml /app/
+# COPY package.json vite.config.js tailwind.config.js postcss.config.js pnpm-lock.yaml /app/
+COPY package.json vite.config.js pnpm-lock.yaml /app/
 COPY resources/ /app/resources/
 
 WORKDIR /app
