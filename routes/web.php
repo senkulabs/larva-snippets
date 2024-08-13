@@ -6,8 +6,10 @@ use App\Livewire\Button;
 use App\Livewire\Form;
 use App\Livewire\NestedSortable;
 use App\Livewire\Select;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,11 +21,8 @@ Route::get('/alert', Alert::class);
 Route::get('/nested-sortable', NestedSortable::class);
 Route::get('/form', Form::class);
 
-// Test job batching
+// Queue and Job batching
 Route::get('/process-csv-file', function () {
-    // NOT RECOMMENDED: Increase memory limit
-    // ini_set('memory_limit', '256M');
-
     $path = storage_path('app/2010-capitalbikeshare-tripdata.csv');
 
     $file = fopen($path, 'r');
@@ -48,5 +47,28 @@ Route::get('/process-csv-file', function () {
                 $batch->add(new ProcessCsvFile($arrs));
             });
         }
+    }
+});
+
+Route::get('/trix-plain', function () {
+    return view('trix-plain');
+});
+
+Route::get('/trix-tailwind', function () {
+    return view('trix-tailwind');
+});
+
+Route::post('/store', function (Request $request) {
+    return $request->content;
+});
+
+Route::post('/upload-file', function (Request $request) {
+    if ($request->hasFile('file')) {
+        $file = $request->file('file');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $filePath = $file->storeAs('uploads', $fileName, 'public');
+        $fileUrl = Storage::url($filePath);
+
+        return response()->json(['url' => $fileUrl], 200);
     }
 });
