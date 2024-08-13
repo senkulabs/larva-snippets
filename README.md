@@ -4,6 +4,19 @@ Web interactions use Larva stack.
 
 > Larva = Laravel + Livewire + AlpineJS + TailwindCSS
 
+## How to run?
+
+Make sure you use PHP version 8.3 or higher and NodeJS version 20 or higher.
+
+```
+cp .env.example .env
+composer install
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate
+php artisan storage:link
+```
+
 ## Interactions
 
 - Button
@@ -14,6 +27,13 @@ Web interactions use Larva stack.
 - Upload CSV file
 - Datatable (soon)
 - Reset Password (soon)
+- Trix Editor (Third Party text editor)
+
+> Note: In Trix Editor interaction, I need to observe these cases:
+
+- https://github.com/basecamp/trix?tab=readme-ov-file
+- https://github.com/tailwindlabs/tailwindcss/issues/989
+- https://github.com/tonysm/rich-text-laravel
 
 ### Upload CSV File
 
@@ -55,6 +75,8 @@ Info:
 - Access http://localhost:8000/process-csv-file to store csv data to `bike_share` table.
 
 ### Upload CSV File with Docker Container
+
+> Warning! This document is old. Need to update!
 
 To run this case with Docker container, I use docker image from serversideup/docker-php. In this project, I try to test Laravel Job Batching (e.g. Process CSV File). The ServerSideUp docs recommend to create 2 container in order to use queue worker. In order to use queue worker, I need to create 2 containers. First container is web app, the second container is queue worker. The 2 container use the same Docker image.
 
