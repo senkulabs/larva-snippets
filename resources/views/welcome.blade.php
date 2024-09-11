@@ -28,6 +28,14 @@
         <h2>Contents:</h2>
         <ul>
             <li><a href="/button">Button</a></li>
+            <li><a href="/select">Select</a></li>
+            <li><a href="/alert">Alert</a></li>
+            <li><a href="/nested-sortable">Nested Sortable</a></li>
+            <li><a href="/form">Form</a></li>
+            <li><a href="/upload-file">Upload File</a></li>
+            <li><a href="#">Datatable</a></li>
+            <li><a href="/reset-password">Reset Password</a></li>
+            <li><a href="#">Trix Editor</a></li>
         </ul>
     </body>
 </html>
