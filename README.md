@@ -8,13 +8,20 @@ Web interactions use Larva stack.
 
 Make sure you use PHP version 8.3 or higher and NodeJS version 20 or higher.
 
-```
+```bash
+# First tab terminal
 cp .env.example .env
 composer install
 php artisan key:generate
 touch database/database.sqlite
 php artisan migrate
 php artisan storage:link
+```
+
+```bash
+# Second tab terminal
+pnpm i
+pnpm run dev
 ```
 
 ## Interactions
@@ -26,7 +33,7 @@ php artisan storage:link
 - Form
 - Upload CSV file
 - Datatable (soon)
-- Reset Password (soon)
+- Reset Password
 - Trix Editor (Third Party text editor)
 
 > Note: In Trix Editor interaction, I need to observe these cases:
