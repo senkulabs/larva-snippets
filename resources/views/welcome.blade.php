@@ -33,7 +33,7 @@
             <li><a href="/nested-sortable">Nested Sortable</a></li>
             <li><a href="/form">Form</a></li>
             <li><a href="/upload-file">Upload File</a></li>
-            <li><a href="#">Datatable</a></li>
+            <li><a href="/datatable">Datatable</a></li>
             <li><a href="/reset-password">Reset Password</a></li>
             <li><a href="#">Trix Editor</a></li>
         </ul>

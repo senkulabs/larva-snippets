@@ -3,6 +3,7 @@
 use App\Jobs\ProcessCsvFile;
 use App\Livewire\Alert;
 use App\Livewire\Button;
+use App\Livewire\Datatable;
 use App\Livewire\Form;
 use App\Livewire\NestedSortable;
 use App\Livewire\ResetPassword;
@@ -22,6 +23,7 @@ Route::get('/alert', Alert::class);
 Route::get('/nested-sortable', NestedSortable::class);
 Route::get('/form', Form::class);
 Route::get('/reset-password', ResetPassword::class);
+Route::get('/datatable', Datatable::class);
 
 // Queue and Job batching
 Route::get('/process-csv-file', function () {
