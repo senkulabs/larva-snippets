@@ -16,9 +16,9 @@ class JobBatching extends Component
     public $startBatch = false;
 
     public function start()
-    {   
+    {
         $this->startBatch = true;
-        
+
         DB::table('bike_share')->truncate();
 
         $path = storage_path('app/2010-capitalbikeshare-tripdata.csv');
@@ -45,7 +45,7 @@ class JobBatching extends Component
                     $batch->add(new ProcessBikeShareFile($arrs));
                 });
 
-                
+
                 $this->batchId = $batch->id;
             }
         }
@@ -66,12 +66,8 @@ class JobBatching extends Component
         $this->batchProgress = $this->batch->progress();
         $this->batchFinished = $this->batch->finished();
         $this->batchCancelled = $this->batch->cancelled();
-
-        if ($this->batchProgress === 100) {
-            $this->startBatch = false;
-        }
     }
-    
+
     public function render()
     {
         return view('livewire.job-batching');
