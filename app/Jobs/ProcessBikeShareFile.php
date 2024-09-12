@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 
-class ProcessCsvFile implements ShouldQueue
+class ProcessBikeShareFile implements ShouldQueue
 {
     use Batchable, Queueable;
 

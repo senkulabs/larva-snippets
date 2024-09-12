@@ -1,10 +1,11 @@
 <?php
 
-use App\Jobs\ProcessCsvFile;
+use App\Jobs\ProcessBikeShareFile;
 use App\Livewire\Alert;
 use App\Livewire\Button;
 use App\Livewire\Datatable;
 use App\Livewire\Form;
+use App\Livewire\JobBatching;
 use App\Livewire\NestedSortable;
 use App\Livewire\ResetPassword;
 use App\Livewire\Select;
@@ -24,6 +25,7 @@ Route::get('/nested-sortable', NestedSortable::class);
 Route::get('/form', Form::class);
 Route::get('/reset-password', ResetPassword::class);
 Route::get('/datatable', Datatable::class);
+Route::get('/job-batching', JobBatching::class);
 
 // Queue and Job batching
 Route::get('/process-csv-file', function () {
@@ -48,7 +50,7 @@ Route::get('/process-csv-file', function () {
                     $arr = array_combine($header, $item);
                     array_push($arrs, $arr);
                 }
-                $batch->add(new ProcessCsvFile($arrs));
+                $batch->add(new ProcessBikeShareFile($arrs));
             });
         }
     }
