@@ -8,7 +8,9 @@
         @stack('styles')
     </head>
     <body>
-        {{ $slot }}
+        <div class="container my-0 mx-auto p-4 md:p-0">
+            {{ $slot }}
+        </div>
         @stack('scripts')
     </body>
 </html>

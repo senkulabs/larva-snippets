@@ -1,14 +1,13 @@
 <?php
 
 use App\Jobs\ProcessBikeShareFile;
-use App\Livewire\Alert;
 use App\Livewire\Button;
 use App\Livewire\Datatable;
 use App\Livewire\Form;
 use App\Livewire\JobBatching;
 use App\Livewire\NestedSortable;
 use App\Livewire\ResetPassword;
-use App\Livewire\Select;
+use App\Livewire\ThirdParty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/button', Button::class);
-Route::get('/select', Select::class);
-Route::get('/alert', Alert::class);
+Route::get('/third-party', ThirdParty::class);
 Route::get('/nested-sortable', NestedSortable::class);
 Route::get('/form', Form::class);
 Route::get('/reset-password', ResetPassword::class);
