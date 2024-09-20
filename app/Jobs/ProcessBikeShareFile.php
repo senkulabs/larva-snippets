@@ -29,10 +29,6 @@ class ProcessBikeShareFile implements ShouldQueue
      */
     public function handle(): void
     {
-        // Truncate bike_share table
-        DB::table('bike_share')->truncate();
-
-        // Then insert data
         DB::table('bike_share')->insert($this->data);
     }
 }
