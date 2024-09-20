@@ -27,14 +27,15 @@ pnpm run dev
 ## Interactions
 
 - Button
-- Select with third-party (Tom Select)
-- Alert with third-party (Sweet Alert)
+- Third-party library
+    - Select (Tom Select)
+    - Alert (Sweet Alert)
+    - Text Area (Trix Editor)
 - Nested Sortable
 - Form
 - Upload CSV file
 - Datatable (soon)
 - Reset Password
-- Trix Editor (Third Party text editor)
 
 > Note: In Trix Editor interaction, I need to observe these cases:
 
