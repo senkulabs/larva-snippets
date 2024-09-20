@@ -5,6 +5,7 @@
         display: none !important;
     }
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/trix/dist/trix.min.css" crossorigin="anonymous">
 @endpush
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
@@ -39,6 +40,7 @@
         });
     })
 </script>
+<script src="https://cdn.jsdelivr.net/npm/trix/dist/trix.umd.min.js" crossorigin="anonymous"></script>
 @endpush
 
 <div>
@@ -119,4 +121,33 @@
     @else
         <p>Good bye! 👋🏼</p>
     @endif
+
+    <h2 class="text-xl">Text Area with Trix Editor</h2>
+    <form wire:submit>
+        <input type="hidden" name="content" id="x">
+        <div wire:ignore>
+            <trix-editor x-data="{
+                upload(event) {
+                    const data = new FormData();
+                    data.append('file', event.attachment.file);
+                    console.log(data);
+
+                    fetch('/upload-file', {
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content')
+                        }
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        body: data
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                    });
+                }
+            }"
+            x-on:trix-attachment-add="upload" input="x" class="trix-content" autofocus></trix-editor>
+        </div>
+        <button class="bg-blue-500 text-white p-2 rounded">Submit</button>
+    </form>
 </div>

@@ -6,6 +6,7 @@
         @vite(['resources/css/app.css'])
         <title>{{ $title ?? 'Page Title' }}</title>
         @stack('styles')
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
         <div class="container my-0 mx-auto p-4 md:p-0">
