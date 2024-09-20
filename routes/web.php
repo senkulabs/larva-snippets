@@ -11,6 +11,7 @@ use App\Livewire\ResetPassword;
 use App\Livewire\Select;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,6 +30,10 @@ Route::get('/job-batching', JobBatching::class);
 
 // Queue and Job batching
 Route::get('/process-csv-file', function () {
+    $path = base_path('csvfile/2010-capitalbikeshare-tripdata.csv');
+    // Truncate
+    DB::table('bike_share')->truncate();
+
     $path = base_path('csvfile/2010-capitalbikeshare-tripdata.csv');
 
     $file = fopen($path, 'r');

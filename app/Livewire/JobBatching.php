@@ -7,13 +7,23 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class JobBatching extends Component
 {
+    use WithPagination;
+
+    public $perPage = 10;
     public $batchId;
     public $batchFinished, $batchCancelled = false;
     public $batchProgress = 0;
     public $startBatch = false;
+
+    #[Computed]
+    public function bikeShare()
+    {
+        return DB::table('bike_share')->paginate($this->perPage);
+    }
 
     public function start()
     {
@@ -66,6 +76,10 @@ class JobBatching extends Component
         $this->batchProgress = $this->batch->progress();
         $this->batchFinished = $this->batch->finished();
         $this->batchCancelled = $this->batch->cancelled();
+
+        if ($this->batchFinished) {
+            $this->startBatch = false;
+        }
     }
 
     public function render()

@@ -29,6 +29,12 @@ class ProcessBikeShareFile implements ShouldQueue
      */
     public function handle(): void
     {
-        DB::table('bike_share')->insert($this->data);
+        // I use transaction to prevent error message from sqlite below.
+        // Error message: General error: 5 database is locked.
+        // The most reason is concurrent access: You're trying to write to the database at the same time,
+        // this can cause locking issues.
+        DB::transaction(function () {
+            DB::table('bike_share')->insert($this->data);
+        });
     }
 }
