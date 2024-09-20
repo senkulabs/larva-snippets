@@ -33,8 +33,10 @@
 @endpush
 
 <div>
-    <p>If you confirm to delete action then this button below will be disappear.</p>
     @if ($visible)
-        <button onclick="confirmDestroy(this);" data-message="Are you sure to delete this item?">Delete</button>    
+        <p>If you confirm to delete action then I will disappear.</p>
+        <button onclick="confirmDestroy(this);" data-message="Are you sure to delete this item?">Delete</button>
+    @else
+        <p>Good bye! 👋🏼</p>
     @endif
 </div>

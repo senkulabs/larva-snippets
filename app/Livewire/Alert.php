@@ -14,11 +14,10 @@ class Alert extends Component
     {
         // Mock delete process in server with sleep function
         sleep(3);
-        $this->visible = false;
         $this->dispatch('alert:ok', data: [
             'message' => 'Item has been deleted!'
         ]);
-        $this->visible = true;
+        $this->visible = false;
     }
 
     public function render()
