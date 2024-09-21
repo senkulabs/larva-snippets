@@ -6,10 +6,13 @@
 </style>
 @endpush
 
-<div x-data="{ count: 0, expanded: false, loading: $wire.entangle('loadingText').live }">
+<div x-data="{ count: 0, expanded: false, loading: $wire.entangle('loading').live }">
+    <h1>Basic</h1>
+
     <h2 x-text="count"></h2>
 
     <button x-on:click="count++">+</button>
+    <button x-on:click="count--">-</button>
 
     <br><br>
 
@@ -22,7 +25,7 @@
 
     <br><br>
 
-    <button x-on:click="loading = true; $wire.click();" wire:loading.attr="disabled">Loading text</button>
+    <button x-on:click="loading = true; $wire.click();" wire:loading.attr="disabled">Start</button>
 
     <p x-cloak x-show="loading">Loading...</p>
 </div>
