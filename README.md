@@ -34,14 +34,8 @@ pnpm run dev
 - Nested Sortable
 - Form
 - Upload CSV file
-- Datatable (soon)
+- Datatable
 - Reset Password
-
-> Note: In Trix Editor interaction, I need to observe these cases:
-
-- https://github.com/basecamp/trix?tab=readme-ov-file
-- https://github.com/tailwindlabs/tailwindcss/issues/989
-- https://github.com/tonysm/rich-text-laravel
 
 ### Upload CSV File
 
