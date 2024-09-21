@@ -123,31 +123,39 @@
     @endif
 
     <h2 class="text-xl">Text Area with Trix Editor</h2>
-    <form wire:submit>
-        <input type="hidden" name="content" id="x">
+    <form wire:submit="submit">
+        <input type="hidden" id="x">
         <div wire:ignore>
             <trix-editor x-data="{
+                setValue(event) {
+                    $wire.content = event.target.value;
+                },
                 upload(event) {
                     const data = new FormData();
                     data.append('file', event.attachment.file);
-                    console.log(data);
 
                     fetch('/upload-file', {
                         headers: {
                             'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content')
-                        }
+                        },
                         method: 'POST',
                         credentials: 'same-origin',
                         body: data
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);
+                        event.attachment.setAttributes({
+                            url: data.image_url
+                        });
                     });
                 }
             }"
-            x-on:trix-attachment-add="upload" input="x" class="trix-content" autofocus></trix-editor>
+            x-on:trix-attachment-add="upload"
+            x-on:trix-change="setValue"
+            x-ref="trix"
+            input="x" class="trix-content"></trix-editor>
         </div>
         <button class="bg-blue-500 text-white p-2 rounded">Submit</button>
+        {!! $content !!}
     </form>
 </div>

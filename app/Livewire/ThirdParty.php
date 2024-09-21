@@ -10,6 +10,7 @@ class ThirdParty extends Component
     public $selectedOption = '1';
     public $selectedOptions = ['3', '4'];
     public $visible = true;
+    public $content;
 
     function clearSelectedOption()
     {
@@ -30,6 +31,11 @@ class ThirdParty extends Component
             'message' => 'Item has been deleted!'
         ]);
         $this->visible = false;
+    }
+
+    public function submit()
+    {
+        // May be add some validation here!
     }
 
     public function render()

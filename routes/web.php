@@ -72,12 +72,13 @@ Route::post('/store', function (Request $request) {
 });
 
 Route::post('/upload-file', function (Request $request) {
-    if ($request->hasFile('file')) {
-        $file = $request->file('file');
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        $filePath = $file->storeAs('uploads', $fileName, 'public');
-        $fileUrl = Storage::url($filePath);
-
-        return response()->json(['url' => $fileUrl], 200);
+    if ($request->has('file')) {
+        $path = request()->file('file')->store('trix-attachments', 'public');
+        return response()->json([
+            'image_url' => Storage::disk('public')->url($path),
+            'image_path' => $path
+        ], 200);
     }
+
+    return response()->json(['error' => 'No file uploaded'], 400);
 });
