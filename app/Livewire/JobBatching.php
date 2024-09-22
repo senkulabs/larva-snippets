@@ -31,34 +31,36 @@ class JobBatching extends Component
 
         DB::table('bike_share')->truncate();
 
-        $path = base_path('csvfile/slim_2010-capitalbikeshare-tripdata.csv');
+        $batch = Bus::batch([])->dispatch();
 
-        $file = fopen($path, 'r');
+        $path = base_path('csvfile/2010-capitalbikeshare-tripdata.csv');
 
-        if ($file !== false) {
-            $header = array_map(function ($head) {
-                return implode('_', explode(' ', strtolower($head)));
-            }, fgetcsv($file));
-            $data = [];
-            if ($header !== false) {
-                while (($record = fgetcsv($file)) !== false) {
-                    array_push($data, $record);
-                }
+        $handle = fopen($path, 'r');
 
-                $batch = Bus::batch([])->dispatch();
-                collect($data)->chunk(10)->each(function ($chunk) use ($header, $batch) {
-                    $arrs = [];
-                    foreach ($chunk as $item) {
-                        $arr = array_combine($header, $item);
-                        array_push($arrs, $arr);
-                    }
-                    $batch->add(new ProcessBikeShareFile($arrs));
-                });
+        $header = fgetcsv($handle);
+        $header = array_map(function ($head) {
+            return implode('_', explode(' ', strtolower($head)));
+        }, $header);
 
+        $chunk = [];
+        $chunkSize = 100;
 
-                $this->batchId = $batch->id;
+        while(($record = fgetcsv($handle)) !== false) {
+            $chunk[] = array_combine($header, $record);
+
+            if (count($chunk) === $chunkSize) {
+                $batch->add(new ProcessBikeShareFile($chunk));
+                $chunk = [];
             }
         }
+
+        if (!empty($chunk)) {
+            $batch->add(new ProcessBikeShareFile($chunk));
+        }
+
+        $this->batchId = $batch->id;
+
+        fclose($handle);
     }
 
     #[Computed]
