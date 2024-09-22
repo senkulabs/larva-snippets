@@ -123,13 +123,13 @@ cp csvfile/* storage/app
 
 ```bash
 # Build a Docker image
-docker build --no-cache -t kresnasatya/larva-interactions .
+docker build -f local.Dockerfile --no-cache -t senkustream/larva-interactions:local .
 ```
 
 4. Run docker compose with command below.
 
 ```
-docker compose -f dev.docker-compose.yml up -d
+docker compose -f local.docker-compose.yml up -d
 ```
 
 5. Open [http://localhost:8080](http://localhost:8080) then click **Process CSV File** in Laravel Features section.

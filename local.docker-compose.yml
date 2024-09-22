@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    image: senkustream/larva-interactions
+    image: senkustream/larva-interactions:local
     ports:
       - 8080:80
     environment:
@@ -11,14 +11,14 @@ services:
       - PHP_POOL_NAME=larva_app
 
   queue:
-    image: senkustream/larva-interactions
+    image: senkustream/larva-interactions:local
     command: ["su", "webuser", "-c", "php artisan queue:work --tries=3"]
     environment:
       - SSL_MODE=off
       - PHP_POOL_NAME=larva_queue
 
   horizon:
-    image: senkustream/larva-interactions
+    image: senkustream/larva-interactions:local
     command: ["su", "webuser", "-c", "php artisan horizon"]
     environment:
       - SSL_MODE=off

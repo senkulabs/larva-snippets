@@ -26,19 +26,18 @@ RUN composer install --prefer-dist --no-ansi --no-interaction --no-progress --no
 # NPM Dependencies
 #
 
-FROM node:20.16.0 as frontend
-
-RUN mkdir -p /app/public
+FROM node:20-slim as public
+ENV PNPM_HOME="/pnpm"
+ENV PATH="${PNPM_HOME}:$PATH"
+RUN corepack enable
 
 # COPY package.json vite.config.js tailwind.config.js postcss.config.js pnpm-lock.yaml /app/
-COPY package.json vite.config.js pnpm-lock.yaml /app/
+COPY package.json vite.config.js tailwind.config.js postcss.config.js pnpm-lock.yaml /app/
 COPY resources/ /app/resources/
 
 WORKDIR /app
-
-RUN npm install -g pnpm
-
-RUN pnpm install && pnpm run build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm run build
 
 #
 # Application container
@@ -55,4 +54,4 @@ RUN apt-get update \
 # Copies the Laravel app, but skips the ignored files and paths
 COPY --chown=9999:9999 . .
 COPY --chown=9999:9999 --from=vendor /app/vendor/ /var/www/html/vendor/
-COPY --chown=9999:9999 --from=frontend /app/public/ /var/www/html/public/
+COPY --chown=9999:9999 --from=public /app/public/ /var/www/html/public/
