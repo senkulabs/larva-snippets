@@ -17,18 +17,18 @@
     <form wire:submit="save" x-data="{ showPassword: false, showPasswordConfirmation: false }">
         <div class="mb-4">
             <label for="username" class="block">Username</label>
-            <input id="username" type="text" wire:model="username" placeholder="Username" class="block rounded">
+            <input id="username" type="text" wire:model="username" placeholder="Username" class="block w-full rounded">
             @error('username') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
         <div class="mb-4">
             <label for="email" class="block">Email</label>
-            <input id="email" type="email" wire:model="email" placeholder="Email" class="block rounded">
+            <input id="email" type="email" wire:model="email" placeholder="Email" class="block w-full rounded">
             @error('email') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
         <div class="mb-4">
             <label for="password" class="block">Password</label>
             <div class="relative">
-                <input :type="showPassword ? 'text' : 'password'" wire:model="password" placeholder="Password" class="block rounded">
+                <input :type="showPassword ? 'text' : 'password'" wire:model="password" placeholder="Password" class="block w-full rounded">
                 <button type="button" @class(['absolute inset-y-0 right-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-500 border border-transparent rounded-r-md active:bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-400']) @click="showPassword = !showPassword" :class="{ 'hidden': showPassword, 'block': !showPassword }">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -46,7 +46,7 @@
         <div class="mb-4">
             <label for="password-confirmation" class="block">Password Confirmation</label>
             <div class="relative">
-                <input id="password-confirmation" :type="showPasswordConfirmation ? 'text' : 'password'" wire:model="password_confirmation" placeholder="Password Confirmation" class="block rounded">
+                <input id="password-confirmation" :type="showPasswordConfirmation ? 'text' : 'password'" wire:model="password_confirmation" placeholder="Password Confirmation" class="block w-full rounded">
                 <button type="button" @class(['absolute inset-y-0 right-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-500 border border-transparent rounded-r-md active:bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-400']) @click="showPasswordConfirmation = !showPasswordConfirmation" :class="{ 'hidden': showPasswordConfirmation, 'block': !showPasswordConfirmation }">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -108,7 +108,7 @@
         </div>
         <div class="mb-4">
             <label for="continent" class="block">Continent</label>
-            <select wire:model="continent" class="block rounded">
+            <select wire:model="continent" class="block w-full rounded">
                 <option value="">Continent</option>
                 <option value="asia">Asia</option>
                 <option value="africa">Africa</option>
@@ -122,12 +122,12 @@
         </div>
         <div class="mb-4">
             <label for="bio" class="block">Tell bit about your self</label>
-            <textarea id="bio" wire:model="bio" cols="30" rows="10" class="block rounded" placeholder="I am..."></textarea>
+            <textarea id="bio" wire:model="bio" cols="30" rows="10" class="block w-full rounded" placeholder="I am..."></textarea>
             @error('bio') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
         <div class="mb-4">
             <label for="dob" class="block">Date of Birth</label>
-            <input id="dob" wire:model="dob" type="date" class="block rounded">
+            <input id="dob" wire:model="dob" type="date" class="block w-full rounded">
             @error('dob') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
         <button class="bg-blue-500 p-2 rounded text-white">Submit</button>
