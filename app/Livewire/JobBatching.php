@@ -31,7 +31,7 @@ class JobBatching extends Component
 
         DB::table('bike_share')->truncate();
 
-        $path = base_path('csvfile/2010-capitalbikeshare-tripdata.csv');
+        $path = base_path('csvfile/slim_2010-capitalbikeshare-tripdata.csv');
 
         $file = fopen($path, 'r');
 
