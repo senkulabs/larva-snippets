@@ -84,6 +84,7 @@ class JobBatching extends Component
 
     public function render()
     {
-        return view('livewire.job-batching');
+        return view('livewire.job-batching')
+        ->title('Job Batching');
     }
 }

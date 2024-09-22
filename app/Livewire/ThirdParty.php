@@ -7,10 +7,33 @@ use Livewire\Component;
 
 class ThirdParty extends Component
 {
+    public $options = [];
     public $selectedOption = '1';
     public $selectedOptions = ['3', '4'];
     public $visible = true;
     public $content;
+
+    public function mount()
+    {
+        $this->options = [
+            [
+                'id' => '1',
+                'name' => 'Jujutsu Kaisen'
+            ],
+            [
+                'id' => '2',
+                'name' => 'One Piece'
+            ],
+            [
+                'id' => '3',
+                'name' => 'Elusive Samurai'
+            ],
+            [
+                'id' => '4',
+                'name' => 'Black Clover'
+            ]
+        ];
+    }
 
     function clearSelectedOption()
     {
@@ -40,25 +63,7 @@ class ThirdParty extends Component
 
     public function render()
     {
-        return view('livewire.third-party', [
-            'options' => [
-                [
-                    'id' => '1',
-                    'name' => 'Jujutsu Kaisen'
-                ],
-                [
-                    'id' => '2',
-                    'name' => 'One Piece'
-                ],
-                [
-                    'id' => '3',
-                    'name' => 'Elusive Samurai'
-                ],
-                [
-                    'id' => '4',
-                    'name' => 'Black Clover'
-                ]
-            ]
-        ]);
+        return view('livewire.third-party')
+        ->title('Third Party');
     }
 }

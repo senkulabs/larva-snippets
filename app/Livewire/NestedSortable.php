@@ -13,7 +13,7 @@ class NestedSortable extends Component
     #[On('set-data')]
     function setData($data)
     {
-        $this->data = $data;   
+        $this->data = $data;
     }
 
     function submit()
@@ -23,11 +23,12 @@ class NestedSortable extends Component
                 'item' => $this->item
             ]);
             $this->item = '';
-        }    
+        }
     }
 
     public function render()
     {
-        return view('livewire.nested-sortable');
+        return view('livewire.nested-sortable')
+        ->title('Nested Sortable');
     }
 }

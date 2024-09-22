@@ -29,7 +29,8 @@ class Form extends Component
 
     public function render()
     {
-        return view('livewire.form');
+        return view('livewire.form')
+        ->title('Form');
     }
 
     function save()
@@ -52,6 +53,7 @@ class Form extends Component
     function clean()
     {
         // Clean the form
-        $this->reset();
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 }
