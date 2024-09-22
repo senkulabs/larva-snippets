@@ -18,22 +18,34 @@
             padding: 0;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
            }
+
+           .container {
+            width: 100%;
+           }
+
+           @media screen and (min-width: 1024px) {
+                .container {
+                    max-width: 1024px;
+                }
+           }
         </style>
     </head>
     <body>
-        <h1>Larva Interactions</h1>
-        <p>Web interactions use Larva stack.</p>
-        <p><em>Larva = Laravel + Livewire + AlpineJS + TailwindCSS</em></p>
+        <div class="container" style="margin: 0 auto; padding: 1rem;">
+            <h1>Larva Interactions</h1>
+            <p>Web interactions use Larva stack.</p>
+            <p><em>Larva = Laravel + Livewire + AlpineJS + TailwindCSS</em></p>
 
-        <h2>Contents:</h2>
-        <ul>
-            <li><a href="/basic">Basic</a></li>
-            <li><a href="/form">Form</a></li>
-            <li><a href="/reset-password">Reset Password</a></li>
-            <li><a href="/nested-sortable">Nested Sortable</a></li>
-            <li><a href="/datatable">Datatable</a></li>
-            <li><a href="/job-batching">Job Batching</a></li>
-            <li><a href="/third-party">Third Party</a></li>
-        </ul>
+            <h2>Contents</h2>
+            <ul>
+                <li><a href="/basic">Basic</a></li>
+                <li><a href="/form">Form</a></li>
+                <li><a href="/reset-password">Reset Password</a></li>
+                <li><a href="/nested-sortable">Nested Sortable</a></li>
+                <li><a href="/datatable">Datatable</a></li>
+                <li><a href="/job-batching">Job Batching</a></li>
+                <li><a href="/third-party">Third Party</a></li>
+            </ul>
+        </div>
     </body>
 </html>
