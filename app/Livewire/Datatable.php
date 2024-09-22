@@ -19,11 +19,11 @@ class Datatable extends Component
             $this->resetPage();
         }
     }
-    
+
     public function render()
     {
         $employees = DB::table('employees');
-        
+
         if (!empty($this->search)) {
             $search = trim(strtolower($this->search));
             $employees = $employees->where('name', 'like', '%'.$search.'%')
@@ -31,8 +31,10 @@ class Datatable extends Component
                 ->orWhere('position', 'like', '%'.$search.'%')
                 ->orWhere('age', 'like', '%'.$search.'%');
         }
+
         return view('livewire.datatable', [
             'employees' => $employees->paginate($this->perPage),
-        ]);
+        ])
+        ->title('Datatable');
     }
 }
