@@ -46,7 +46,7 @@ class JobBatching extends Component
                 }
 
                 $batch = Bus::batch([])->dispatch();
-                collect($data)->chunk(100)->each(function ($chunk) use ($header, $batch) {
+                collect($data)->chunk(10)->each(function ($chunk) use ($header, $batch) {
                     $arrs = [];
                     foreach ($chunk as $item) {
                         $arr = array_combine($header, $item);

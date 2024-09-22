@@ -12,6 +12,7 @@ use App\Livewire\ThirdParty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -37,4 +38,22 @@ Route::post('/upload-file', function (Request $request) {
     }
 
     return response()->json(['error' => 'No file uploaded'], 400);
+});
+
+Route::get('/test-redis', function () {
+    try {
+        Redis::set('test_key', 'Redis Connection success!');
+
+        $value = Redis::get('test_key');
+
+        return response()->json([
+            'status' => 'success',
+            'message' => $value
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 400);
+    }
 });
