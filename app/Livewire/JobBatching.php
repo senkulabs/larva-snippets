@@ -43,7 +43,7 @@ class JobBatching extends Component
         }, $header);
 
         $chunk = [];
-        $chunkSize = 100;
+        $chunkSize = 1000;
 
         while(($record = fgetcsv($handle)) !== false) {
             $chunk[] = array_combine($header, $record);
