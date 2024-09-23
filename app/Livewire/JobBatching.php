@@ -39,7 +39,7 @@ class JobBatching extends Component
 
         $header = fgetcsv($handle);
         $header = array_map(function ($head) {
-            return implode('_', explode(' ', strtolower($head)));
+            return strtolower(str_replace(' ', '_', $head));
         }, $header);
 
         $chunk = [];
