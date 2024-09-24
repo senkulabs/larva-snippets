@@ -15,16 +15,33 @@ class JobBatching extends Component
     use WithPagination;
 
     public $perPage = 10;
+    public $search = '';
     public $batchId;
     public $batchFinished, $batchCancelled = false;
     public $batchProgress = 0;
     public $startBatch = false;
     private $table = 'websites';
 
+    public function updated($property)
+    {
+        if ($property === 'search') {
+            $this->resetPage();
+        }
+    }
+
     #[Computed]
     public function websites()
     {
-        return DB::table($this->table)->paginate($this->perPage);
+        $website = DB::table($this->table);
+
+        if (!empty($this->search)) {
+            $search = trim(strtolower($this->search));
+            $website = $website->where('Domain', 'like', '%'.$search.'%');
+        }
+
+        $website = $website->orderBy('Domain')->cursorPaginate($this->perPage);
+
+        return $website;
     }
 
     public function start()

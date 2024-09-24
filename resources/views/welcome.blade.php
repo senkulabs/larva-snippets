@@ -38,13 +38,10 @@
 
             <h2>Contents</h2>
             <ul>
-                <li><a href="/basic">Basic</a></li>
                 <li><a href="/form">Form</a></li>
-                <li><a href="/reset-password">Reset Password</a></li>
-                <li><a href="/nested-sortable">Nested Sortable</a></li>
+                <li><a href="/third-party">Third Party</a></li>
                 <li><a href="/datatable">Datatable</a></li>
                 <li><a href="/job-batching">Job Batching</a></li>
-                <li><a href="/third-party">Third Party</a></li>
             </ul>
         </div>
     </body>

@@ -1,18 +1,23 @@
 <div>
+    <a href="/" class="underline text-blue-500">Back</a>
     <h1 class="text-2xl">Datatable</h1>
     <h2 class="text-xl">Basic Datatable</h2>
     <p>This demo shows example of basic Datatable using Livewire</p>
-    <div class="my-4">
-        <label>
-            <select wire:model.change="perPage">
-                <option>10</option>
-                <option>25</option>
-                <option>50</option>
-                <option>100</option>
-            </select>
-            entries per page
-        </label>
-        <input type="text" wire:model.change="search">
+    <div class="flex items-center gap-4 my-4">
+        <div class="flex-1">
+            <label>
+                <select wire:model.change="perPage">
+                    <option>10</option>
+                    <option>25</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+                entries per page
+            </label>
+            <input type="text" wire:model.change="search">
+        </div>
+
+        <button wire:click="$refresh" class="rounded p-2 bg-blue-500 text-white">Refresh</button>
     </div>
     <table class="w-full table-auto border-collapse border border-slate-400">
         <thead>
