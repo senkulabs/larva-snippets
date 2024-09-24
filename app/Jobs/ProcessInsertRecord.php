@@ -10,21 +10,19 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 
-class ProcessCSVFile implements ShouldQueue
+class ProcessInsertRecord implements ShouldQueue
 {
     use Batchable, Queueable;
 
     private $table;
-    private $header;
     private $data;
 
     /**
      * Create a new job instance.
      */
-    public function __construct($table, $header, $data)
+    public function __construct($table, $data)
     {
         $this->table = $table;
-        $this->header = $header;
         $this->data = $data;
     }
 
@@ -33,10 +31,8 @@ class ProcessCSVFile implements ShouldQueue
      */
     public function handle(): void
     {
-        foreach ($this->data as $data) {
-            DB::transaction(function () use ($data) {
-                DB::table($this->table)->insert(array_combine($this->header, $data));
-            });
-        }
+        DB::transaction(function () {
+            DB::table($this->table)->insert($this->data);
+        });
     }
 }

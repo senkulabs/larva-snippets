@@ -2,10 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Jobs\ProcessBikeShareFile;
-use App\Jobs\ProcessCSVFile;
+use App\Jobs\ProcessInsertRecord;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\LazyCollection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -50,33 +50,21 @@ class JobBatching extends Component
 
         DB::table($this->table)->truncate();
 
-        $batch = Bus::batch([])->dispatch();
+        $websites = LazyCollection::make(function () {
+            $handle = fopen(base_path('csvfile/majestic_million.csv'), 'r');
 
-        $path = base_path('csvfile/majestic_million.csv');
-
-        $handle = fopen($path, 'r');
-
-        $header = fgetcsv($handle);
-
-        $chunk = [];
-        $chunkSize = 1000;
-
-        while(($record = fgetcsv($handle)) !== false) {
-            $chunk[] = $record;
-
-            if (count($chunk) === $chunkSize) {
-                $batch->add(new ProcessCSVFile($this->table, $header, $chunk));
-                $chunk = [];
+            $header = fgetcsv($handle);
+            while (($line = fgetcsv($handle)) !== false) {
+                yield array_combine($header, $line);
             }
-        }
+        });
 
-        if (!empty($chunk)) {
-            $batch->add(new ProcessCSVFile($this->table, $header, $chunk));
-        }
+        $batch = Bus::batch([])->dispatch();
+        $websites->chunk(100)->each(function ($chunk) use ($batch) {
+            $batch->add(new ProcessInsertRecord('websites', $chunk->toArray()));
+        });
 
         $this->batchId = $batch->id;
-
-        fclose($handle);
     }
 
     #[Computed]
