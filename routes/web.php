@@ -51,3 +51,7 @@ Route::get('/test-redis', function () {
         ], 400);
     }
 });
+
+Route::get('/phpinfo', function() {
+    phpinfo();
+});
