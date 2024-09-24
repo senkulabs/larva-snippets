@@ -11,7 +11,7 @@
 
     <h1 class="text-2xl">Job Batching</h1>
 
-    <p>This example shows how to implements Job Batching with Livewire and AlpineJS using <a class="underline text-blue-500" href="https://www.kaggle.com/datasets/alexsocarras/dc-capital-bikeshare">Capital Bike Share data.</a></p>
+    <p>This example shows how to implements Job Batching with Livewire and AlpineJS using <a class="underline text-blue-500" href="https://blog.majestic.com/development/majestic-million-csv-daily/">Majestic Million data.</a></p>
     <p>The CSV file stored in <code class="bg-gray-100 p-1 inline-block rounded">csvfile</code> directory.</p>
 
     <button type="button" @click="startBatch = true; batchFinished = false; batchCancelled = false; batchProgress = 0; $wire.start();" :disabled="startBatch" :class="startBatch ? 'disabled:bg-slate-100' : ''" class="bg-blue-300 p-2 rounded">Import</button>
@@ -43,39 +43,45 @@
     <table class="border-collapse border border-slate-400">
         <thead>
             <tr>
-                <th class="border border-slate-300">Duration</th>
-                <th class="border border-slate-300">Start Date</th>
-                <th class="border border-slate-300">End Date</th>
-                <th class="border border-slate-300">Start Station Number</th>
-                <th class="border border-slate-300">Start Station</th>
-                <th class="border border-slate-300">End Station Number</th>
-                <th class="border border-slate-300">End Station</th>
-                <th class="border border-slate-300">Bike Number</th>
-                <th class="border border-slate-300">Member Type</th>
+                <th class="border border-slate-300">GlobalRank</th>
+                <th class="border border-slate-300">TldRank</th>
+                <th class="border border-slate-300">Domain</th>
+                <th class="border border-slate-300">TLD</th>
+                <th class="border border-slate-300">RefSubNets</th>
+                <th class="border border-slate-300">RefIPs</th>
+                <th class="border border-slate-300">IDN_Domain</th>
+                <th class="border border-slate-300">IDN_TLD</th>
+                <th class="border border-slate-300">PrevGlobalRank</th>
+                <th class="border border-slate-300">PrevTldRank</th>
+                <th class="border border-slate-300">PrevRefSubNets</th>
+                <th class="border border-slate-300">PrevRefIPs</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($this->bike_share as $info)
+            @forelse ($this->websites as $site)
             <tr>
-                <td class="border border-slate-300">{{ $info->duration }}</td>
-                <td class="border border-slate-300">{{ $info->start_date }}</td>
-                <td class="border border-slate-300">{{ $info->end_date }}</td>
-                <td class="border border-slate-300">{{ $info->start_station_number }}</td>
-                <td class="border border-slate-300">{{ $info->start_station }}</td>
-                <td class="border border-slate-300">{{ $info->end_station_number }}</td>
-                <td class="border border-slate-300">{{ $info->end_station }}</td>
-                <td class="border border-slate-300">{{ $info->bike_number }}</td>
-                <td class="border border-slate-300">{{ $info->member_type }}</td>
+                <td class="border border-slate-300">{{ $site->GlobalRank }}</td>
+                <td class="border border-slate-300">{{ $site->TldRank }}</td>
+                <td class="border border-slate-300">{{ $site->Domain }}</td>
+                <td class="border border-slate-300">{{ $site->TLD }}</td>
+                <td class="border border-slate-300">{{ $site->RefSubNets }}</td>
+                <td class="border border-slate-300">{{ $site->RefIPs }}</td>
+                <td class="border border-slate-300">{{ $site->IDN_Domain }}</td>
+                <td class="border border-slate-300">{{ $site->IDN_TLD }}</td>
+                <td class="border border-slate-300">{{ $site->PrevGlobalRank }}</td>
+                <td class="border border-slate-300">{{ $site->PrevTldRank }}</td>
+                <td class="border border-slate-300">{{ $site->PrevRefSubNets }}</td>
+                <td class="border border-slate-300">{{ $site->PrevRefIPs }}</td>
             </tr>
             @empty
             <tr>
-                <td colspan="9">No data.</td>
+                <td colspan="12">No data.</td>
             </tr>
             @endforelse
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="9">{{ $this->bike_share->links() }}</td>
+                <td colspan="12">{{ $this->websites->links() }}</td>
             </tr>
         </tfoot>
     </table>

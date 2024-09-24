@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Jobs\ProcessBikeShareFile;
+use App\Jobs\ProcessCSVFile;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
@@ -18,44 +19,42 @@ class JobBatching extends Component
     public $batchFinished, $batchCancelled = false;
     public $batchProgress = 0;
     public $startBatch = false;
+    private $table = 'websites';
 
     #[Computed]
-    public function bikeShare()
+    public function websites()
     {
-        return DB::table('bike_share')->paginate($this->perPage);
+        return DB::table($this->table)->paginate($this->perPage);
     }
 
     public function start()
     {
         $this->startBatch = true;
 
-        DB::table('bike_share')->truncate();
+        DB::table($this->table)->truncate();
 
         $batch = Bus::batch([])->dispatch();
 
-        $path = base_path('csvfile/2010-capitalbikeshare-tripdata.csv');
+        $path = base_path('csvfile/majestic_million.csv');
 
         $handle = fopen($path, 'r');
 
         $header = fgetcsv($handle);
-        $header = array_map(function ($head) {
-            return strtolower(str_replace(' ', '_', $head));
-        }, $header);
 
         $chunk = [];
         $chunkSize = 1000;
 
         while(($record = fgetcsv($handle)) !== false) {
-            $chunk[] = array_combine($header, $record);
+            $chunk[] = $record;
 
             if (count($chunk) === $chunkSize) {
-                $batch->add(new ProcessBikeShareFile($chunk));
+                $batch->add(new ProcessCSVFile($this->table, $header, $chunk));
                 $chunk = [];
             }
         }
 
         if (!empty($chunk)) {
-            $batch->add(new ProcessBikeShareFile($chunk));
+            $batch->add(new ProcessCSVFile($this->table, $header, $chunk));
         }
 
         $this->batchId = $batch->id;
