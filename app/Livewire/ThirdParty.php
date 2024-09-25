@@ -12,6 +12,8 @@ class ThirdParty extends Component
     public $selectedOptions = ['3', '4'];
     public $visible = true;
     public $content;
+    public $sortableData;
+    public $sortableItem;
 
     public function mount()
     {
@@ -56,9 +58,25 @@ class ThirdParty extends Component
         $this->visible = false;
     }
 
-    public function submit()
+    public function submitEditor()
     {
         // May be add some validation here!
+    }
+
+    #[On('set-data')]
+    function setSortableData($data)
+    {
+        $this->sortableData = $data;
+    }
+
+    public function submitSortable()
+    {
+        if (!empty($this->sortableItem)) {
+            $this->dispatch('nested-sortable-store-item', data: [
+                'item' => $this->sortableItem
+            ]);
+            $this->sortableItem = '';
+        }
     }
 
     public function render()

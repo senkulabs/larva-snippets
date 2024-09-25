@@ -238,6 +238,7 @@
                     });
                 }
             }"
+            x-on:trix-file-accept="event.preventDefault()"
             x-on:trix-attachment-add="upload"
             x-on:trix-change="setValue"
             x-ref="trix"
