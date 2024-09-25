@@ -32,6 +32,6 @@ jobs:
         CI_REGISTRY_PASSWORD: ${{ secrets.CI_REGISTRY_PASSWORD }}
       run: |
         podman login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD docker.io
-        podman build --format=docker -f pro.Dockerfile -t $DOCKER_REGISTRY:$TAG .
+        podman build --format=docker -f Dockerfile -t $DOCKER_REGISTRY:$TAG .
         podman push $DOCKER_REGISTRY:$TAG
 

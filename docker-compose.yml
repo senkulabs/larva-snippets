@@ -8,18 +8,22 @@ services:
     environment:
       - SSL_MODE=off
       - AUTORUN_LARAVEL_MIGRATION=true
-      - PHP_POOL_NAME=larva_app
+      - PHP_FPM_POOL_NAME=larva_app
+
+  redis:
+    image: redis:6
+    command: "redis-server --appendonly yes"
 
   queue:
     image: senkustream/larva-interactions:local
-    command: ["su", "webuser", "-c", "php artisan queue:work --tries=3"]
+    command: ["php", "/var/www/html/artisan", "queue:work", "--tries=3"]
     environment:
       - SSL_MODE=off
-      - PHP_POOL_NAME=larva_queue
+      - PHP_FPM_POOL_NAME=larva_queue
 
   horizon:
     image: senkustream/larva-interactions:local
-    command: ["su", "webuser", "-c", "php artisan horizon"]
+    command: ["php", "/var/www/html/artisan", "horizon"]
     environment:
       - SSL_MODE=off
-      - PHP_POOL_NAME=larva_queue
+      - PHP_FPM_POOL_NAME=larva_horizon

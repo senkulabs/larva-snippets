@@ -1,7 +1,7 @@
 #
 # Stage 1: PNPM dependencies as public
 #
-FROM docker.io/node:20-slim as public
+FROM docker.io/node:20-slim AS public
 ENV PNPM_HOME="/pnpm"
 ENV PATH="${PNPM_HOME}:$PATH"
 RUN corepack enable
@@ -17,7 +17,7 @@ RUN pnpm run build
 #
 # Stage 2: Composer dependencies as vendor
 #
-FROM docker.io/serversideup/php:8.3-cli as vendor
+FROM docker.io/serversideup/php:8.3-cli AS vendor
 
 COPY --chown=www-data:www-data . /var/www/html
 
@@ -26,7 +26,7 @@ RUN composer install --no-interaction --optimize-autoloader --no-dev
 #
 # Web App
 #
-FROM docker.io/serversideup/php:8.3-fpm-nginx-alpine as webapp
+FROM docker.io/serversideup/php:8.3-fpm-nginx-alpine AS webapp
 
 ARG build=develop
 
