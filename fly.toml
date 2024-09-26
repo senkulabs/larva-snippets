@@ -7,6 +7,9 @@ app = 'larva-interactions'
 primary_region = 'sin'
 console_command = 'php /var/www/html/artisan tinker'
 
+[deploy]
+  strategy = 'immediate'
+
 [build]
   [build.args]
     NODE_VERSION = '18'
@@ -41,6 +44,6 @@ console_command = 'php /var/www/html/artisan tinker'
     interval = '15s'
     method = 'get'
     path = '/up'
-    port = 80
+    port = 8080
     timeout = '10s'
     type = 'http'
