@@ -4,8 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use function Laravel\Prompts\table;
-
 return new class extends Migration
 {
     /**
@@ -15,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('websites', function (Blueprint $table) {
             $table->id();
-            $table->string('GlobalRank');
-            $table->string('TldRank');
+            $table->integer('GlobalRank');
+            $table->integer('TldRank');
             $table->string('Domain');
             $table->string('TLD');
-            $table->string('RefSubNets');
-            $table->string('RefIPs');
+            $table->integer('RefSubNets');
+            $table->integer('RefIPs');
             $table->string('IDN_Domain');
             $table->string('IDN_TLD');
-            $table->string('PrevGlobalRank');
-            $table->string('PrevTldRank');
-            $table->string('PrevRefSubNets');
-            $table->string('PrevRefIPs');
+            $table->integer('PrevGlobalRank');
+            $table->integer('PrevTldRank');
+            $table->integer('PrevRefSubNets');
+            $table->integer('PrevRefIPs');
             $table->timestamps();
         });
     }
