@@ -33,6 +33,7 @@ class Datatable extends Component
         }
 
         return view('livewire.datatable', [
+            'content' => markdown_convert(resource_path('docs/datatable.md')),
             'employees' => $employees->paginate($this->perPage),
         ])
         ->title('Datatable');

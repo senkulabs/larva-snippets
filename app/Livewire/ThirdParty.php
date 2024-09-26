@@ -11,7 +11,7 @@ class ThirdParty extends Component
     public $selectedOption = '1';
     public $selectedOptions = ['3', '4'];
     public $visible = true;
-    public $content;
+    public $text;
     public $sortableData;
     public $sortableItem;
 
@@ -81,7 +81,9 @@ class ThirdParty extends Component
 
     public function render()
     {
-        return view('livewire.third-party')
+        return view('livewire.third-party', [
+            'content' => markdown_convert(resource_path('docs/third-party.md'))
+        ])
         ->title('Third Party');
     }
 }

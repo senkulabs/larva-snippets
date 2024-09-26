@@ -29,7 +29,9 @@ class Form extends Component
 
     public function render()
     {
-        return view('livewire.form')
+        return view('livewire.form', [
+            'content' => markdown_convert(resource_path('docs/form.md'))
+        ])
         ->title('Form');
     }
 

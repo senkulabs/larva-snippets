@@ -1,7 +1,61 @@
+<details class="my-4">
+    <summary>Let me see the code 👀</summary>
+
+```php tab=Route filename=routes/web.php
+<?php
+
+use App\Livewire\Datatable;
+
+Route::get('/datatable', Datatable::class);
+```
+
+```php tab=Controller filename=app/Livewire/Datatable.php
+<?php
+
+namespace App\Livewire;
+
+use Illuminate\Support\Facades\DB;
+use Livewire\Component;
+use Livewire\WithPagination;
+
+class Datatable extends Component
+{
+    use WithPagination;
+
+    public $perPage = 10;
+    public $search = '';
+
+    public function updated($property)
+    {
+        if ($property === 'search') {
+            $this->resetPage();
+        }
+    }
+
+    public function render()
+    {
+        $employees = DB::table('employees');
+
+        if (!empty($this->search)) {
+            $search = trim(strtolower($this->search));
+            $employees = $employees->where('name', 'like', '%'.$search.'%')
+                ->orWhere('office', 'like', '%'.$search.'%')
+                ->orWhere('position', 'like', '%'.$search.'%')
+                ->orWhere('age', 'like', '%'.$search.'%');
+        }
+
+        return view('livewire.datatable', [
+            'employees' => $employees->paginate($this->perPage),
+        ])
+        ->title('Datatable');
+    }
+}
+```
+
+```blade tab=View filename=resources/views/livewire/datatable.blade.php
 <div>
     <a href="/" class="underline text-blue-500">Back</a>
     <h1 class="text-2xl">Datatable</h1>
-    {!! $content !!}
     <h2 class="text-xl">Basic Datatable</h2>
     <p>This demo shows example of basic Datatable using Livewire</p>
     <div class="flex items-center gap-4 my-4">
@@ -55,3 +109,5 @@
         ]) }}
     </div>
 </div>
+```
+</details>

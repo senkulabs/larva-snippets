@@ -90,7 +90,9 @@ class JobBatching extends Component
 
     public function render()
     {
-        return view('livewire.job-batching')
+        return view('livewire.job-batching', [
+            'content' => markdown_convert(resource_path('docs/job-batching.md'))
+        ])
         ->title('Job Batching');
     }
 }
