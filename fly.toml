@@ -31,6 +31,16 @@ console_command = 'php /var/www/html/artisan tinker'
   processes = ['app']
 
 [[vm]]
-  memory = '1gb'
+  memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
+
+[checks]
+  [checks.web_server_check]
+    grace_period = '30s'
+    interval = '15s'
+    method = 'get'
+    path = '/up'
+    port = '80'
+    timeout = '10s'
+    type = 'http'
