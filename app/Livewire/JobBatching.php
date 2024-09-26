@@ -39,7 +39,7 @@ class JobBatching extends Component
             $website = $website->where('Domain', 'like', '%'.$search.'%');
         }
 
-        $website = $website->orderBy('Domain')->cursorPaginate($this->perPage);
+        $website = $website->orderBy('GlobalRank')->cursorPaginate($this->perPage);
 
         return $website;
     }
@@ -60,7 +60,7 @@ class JobBatching extends Component
         });
 
         $batch = Bus::batch([])->dispatch();
-        $websites->chunk(100)->each(function ($chunk) use ($batch) {
+        $websites->chunk(1000)->each(function ($chunk) use ($batch) {
             $batch->add(new ProcessInsertRecord('websites', $chunk->toArray()));
         });
 

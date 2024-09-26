@@ -65,15 +65,11 @@
         <thead>
             <tr>
                 <th class="p-2 border border-slate-300">GlobalRank</th>
-                <th class="p-2 border border-slate-300">TldRank</th>
                 <th class="p-2 border border-slate-300">Domain</th>
                 <th class="p-2 border border-slate-300">TLD</th>
                 <th class="p-2 border border-slate-300">RefSubNets</th>
                 <th class="p-2 border border-slate-300">RefIPs</th>
-                <th class="p-2 border border-slate-300">IDN_Domain</th>
-                <th class="p-2 border border-slate-300">IDN_TLD</th>
                 <th class="p-2 border border-slate-300">PrevGlobalRank</th>
-                <th class="p-2 border border-slate-300">PrevTldRank</th>
                 <th class="border border-slate-300">PrevRefSubNets</th>
                 <th class="border border-slate-300">PrevRefIPs</th>
             </tr>
@@ -82,15 +78,11 @@
             @forelse ($this->websites as $site)
             <tr @class(['bg-gray-100'=> ($loop->index % 2 === 0)])>
                 <td class="p-2 border border-slate-300">{{ $site->GlobalRank }}</td>
-                <td class="p-2 border border-slate-300">{{ $site->TldRank }}</td>
                 <td class="p-2 border border-slate-300">{{ $site->Domain }}</td>
                 <td class="p-2 border border-slate-300">{{ $site->TLD }}</td>
                 <td class="p-2 border border-slate-300">{{ $site->RefSubNets }}</td>
                 <td class="p-2 border border-slate-300">{{ $site->RefIPs }}</td>
-                <td class="p-2 border border-slate-300">{{ $site->IDN_Domain }}</td>
-                <td class="p-2 border border-slate-300">{{ $site->IDN_TLD }}</td>
                 <td class="p-2 border border-slate-300">{{ $site->PrevGlobalRank }}</td>
-                <td class="p-2 border border-slate-300">{{ $site->PrevTldRank }}</td>
                 <td class="p-2 border border-slate-300">{{ $site->PrevRefSubNets }}</td>
                 <td class="p-2 border border-slate-300">{{ $site->PrevRefIPs }}</td>
             </tr>
