@@ -16,6 +16,7 @@
 <div>
     <a href="/" class="underline text-blue-500">Back</a>
     <h1 class="text-2xl mb-4">Form</h1>
+    <p class="mb-4">The root cause of why programmers do CRUD (Create, Read, Update, and Delete)</p>
     {!! $content !!}
     <form wire:submit="save" x-data="{ showPassword: false, showPasswordConfirmation: false }">
         <div class="mb-4">
