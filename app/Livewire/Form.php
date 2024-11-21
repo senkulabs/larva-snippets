@@ -3,11 +3,11 @@
 namespace App\Livewire;
 
 use Livewire\Attributes\Validate;
+use Livewire\Form as LivewireForm;
 use Livewire\Component;
 
-class Form extends Component
+class HumanForm extends LivewireForm
 {
-    public $data = [];
     #[Validate('required')]
     public $username = '';
     #[Validate('required|email')]
@@ -26,6 +26,12 @@ class Form extends Component
     public $bio = '';
     #[Validate('required')]
     public $dob = '';
+}
+
+class Form extends Component
+{
+    public HumanForm $form;
+    public $data = [];
 
     public function render()
     {
@@ -39,16 +45,15 @@ class Form extends Component
     {
         $this->validate();
         // Add other hobby to hobbies
-        array_push($this->hobbies, $this->otherHobby);
+        array_push($this->form->hobbies, $this->form->otherHobby);
         $this->data = array_merge([], [
-            'name' => $this->name,
-            'username' => $this->username,
-            'email' => $this->email,
-            'gender' => ucfirst($this->gender),
-            'continent' => ucwords($this->continent),
-            'dob' => \Carbon\Carbon::parse($this->dob)->locale('en_US')->isoFormat('MMMM DD YYYY'),
-            'hobbies' => implode(', ', $this->hobbies),
-            'bio' => $this->bio
+            'username' => $this->form->username,
+            'email' => $this->form->email,
+            'gender' => ucfirst($this->form->gender),
+            'continent' => ucwords($this->form->continent),
+            'dob' => \Carbon\Carbon::parse($this->form->dob)->locale('en_US')->isoFormat('MMMM DD YYYY'),
+            'hobbies' => implode(', ', $this->form->hobbies),
+            'bio' => $this->form->bio
         ]);
     }
 
