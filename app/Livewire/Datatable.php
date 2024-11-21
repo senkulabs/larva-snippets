@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -20,6 +21,7 @@ class Datatable extends Component
         }
     }
 
+    #[Title('Datatable - Larva Interactions')]
     public function render()
     {
         $employees = DB::table('employees');
@@ -35,7 +37,6 @@ class Datatable extends Component
         return view('livewire.datatable', [
             'content' => markdown_convert(resource_path('docs/datatable.md')),
             'employees' => $employees->paginate($this->perPage),
-        ])
-        ->title('Datatable');
+        ]);
     }
 }

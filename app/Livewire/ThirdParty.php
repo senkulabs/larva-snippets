@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 class ThirdParty extends Component
@@ -79,11 +80,11 @@ class ThirdParty extends Component
         }
     }
 
+    #[Title('Third Party - Larva Interactions')]
     public function render()
     {
         return view('livewire.third-party', [
             'content' => markdown_convert(resource_path('docs/third-party.md'))
-        ])
-        ->title('Third Party');
+        ]);
     }
 }

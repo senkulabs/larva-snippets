@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\LazyCollection;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -88,11 +89,11 @@ class JobBatching extends Component
         }
     }
 
+    #[Title('Job Batching - Larva Interactions')]
     public function render()
     {
         return view('livewire.job-batching', [
             'content' => markdown_convert(resource_path('docs/job-batching.md'))
-        ])
-        ->title('Job Batching');
+        ]);
     }
 }

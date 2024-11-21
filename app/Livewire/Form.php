@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Form as LivewireForm;
 use Livewire\Component;
@@ -33,12 +34,12 @@ class Form extends Component
     public HumanForm $form;
     public $data = [];
 
+    #[Title('Form - Larva Interactions')]
     public function render()
     {
         return view('livewire.form', [
             'content' => markdown_convert(resource_path('docs/form.md'))
-        ])
-        ->title('Form');
+        ]);
     }
 
     function save()
