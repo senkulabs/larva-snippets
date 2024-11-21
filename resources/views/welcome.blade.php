@@ -36,7 +36,7 @@
             <p>Web interactions use Larva stack.</p>
             <p><em>Larva = Laravel + Livewire + AlpineJS + TailwindCSS</em></p>
             <p><strong>Wait! ✋</strong></p>
-            <p><em>There's a term called TALL (TailwindCSS + Alpine + Laravel + Livewire) stack! You don't know it!?</em></p>
+            <p><em>"There's a term called TALL (TailwindCSS + Alpine + Laravel + Livewire) stack! You don't know it!?"</em></p>
             <p>I know it! But, I want to create alternative term. Larva is cool and fun! I bet you have heard "Larva" before. :)</p>
             <details>
                 <summary>Enough! Show to me what do you mean!</summary>
