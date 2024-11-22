@@ -115,7 +115,7 @@ class extends Component
 
     <h1 class="text-2xl">Job Batching</h1>
     {!! $md_content !!}
-    <p>This example shows how to implements Job Batching with Livewire and AlpineJS using <a class="underline text-blue-500" href="https://blog.majestic.com/development/majestic-million-csv-daily/">Majestic Million data.</a></p>
+    <p>This example shows how to implements Job Batching with Livewire and Alpine using <a class="underline text-blue-500" href="https://blog.majestic.com/development/majestic-million-csv-daily/">Majestic Million data.</a></p>
     <p>The CSV file stored in <code class="bg-gray-100 p-1 inline-block rounded">csvfile</code> directory.</p>
 
     <div class="my-4">

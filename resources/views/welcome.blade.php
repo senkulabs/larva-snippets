@@ -34,9 +34,9 @@
         <div class="container" style="margin: 0 auto; padding: 1rem;">
             <h1>Larva Interactions</h1>
             <p>Web interactions use Larva stack.</p>
-            <p><em>Larva = Laravel + Livewire + AlpineJS + TailwindCSS</em></p>
+            <p><em>Larva = Laravel + Tailwind + Livewire + Alpine</em></p>
             <p><strong>Wait! ✋</strong></p>
-            <p><em>"There's a term called TALL (TailwindCSS + Alpine + Laravel + Livewire) stack! You don't know it!?"</em></p>
+            <p><em>"There's a term called TALL (Tailwind + Alpine + Laravel + Livewire) stack! You don't know it!?"</em></p>
             <p>I know it! But, I want to create alternative term. Larva is cool and fun! I bet you have heard "Larva" before. :)</p>
             <details>
                 <summary>Enough! Show to me what do you mean!</summary>

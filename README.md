@@ -2,7 +2,7 @@
 
 Web interactions use Larva stack.
 
-> Larva = Laravel + Livewire + AlpineJS + TailwindCSS
+> Larva = Laravel + Tailwind + Livewire + Alpine
 
 ## How to run?
 
