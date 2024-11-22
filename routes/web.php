@@ -1,7 +1,5 @@
 <?php
 
-use App\Livewire\Datatable;
-use App\Livewire\JobBatching;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
@@ -16,8 +14,8 @@ Route::get('/third-party', function () {
     return view('third-party');
 });
 Volt::route('/form', 'form');
-Route::get('/datatable', Datatable::class);
-Route::get('/job-batching', JobBatching::class);
+Volt::route('/datatable', 'datatable');
+Volt::route('/job-batching', 'job-batching');
 
 Route::post('/upload-file', function (Request $request) {
     if ($request->has('file')) {

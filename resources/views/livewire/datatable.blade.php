@@ -1,7 +1,50 @@
+<?php
+
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Title;
+use Livewire\Volt\Component;
+use Livewire\WithPagination;
+
+new
+#[Title('Datatable - Larva Interactions')]
+class extends Component
+{
+    use WithPagination;
+
+    public $perPage = 10;
+    public $search = '';
+
+    public function updated($property)
+    {
+        if ($property === 'search') {
+            $this->resetPage();
+        }
+    }
+
+    public function with(): array
+    {
+        $employees = DB::table('employees');
+
+        if (!empty($this->search)) {
+            $search = trim(strtolower($this->search));
+            $employees = $employees->where('name', 'like', '%'.$search.'%')
+                ->orWhere('office', 'like', '%'.$search.'%')
+                ->orWhere('position', 'like', '%'.$search.'%')
+                ->orWhere('age', 'like', '%'.$search.'%');
+        }
+
+        return [
+            'md_content' => markdown_convert(resource_path('docs/datatable.md')),
+            'employees' => $employees->paginate($this->perPage),
+        ];
+    }
+}
+?>
+
 <div>
     <a href="/" class="underline text-blue-500">Back</a>
     <h1 class="text-2xl">Datatable</h1>
-    {!! $content !!}
+    {!! $md_content !!}
     <h2 class="text-xl">Basic Datatable</h2>
     <p>This demo shows example of basic Datatable using Livewire</p>
     <div class="flex items-center gap-4 my-4">

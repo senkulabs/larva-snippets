@@ -4,12 +4,12 @@
 ```php tab=Route filename=routes/web.php
 <?php
 
-use App\Livewire\JobBatching;
+use Livewire\Volt\Volt;
 
-Route::get('/job-batching', JobBatching::class);
+Volt::route('/job-batching', 'job-batching');
 ```
 
-```php tab=Controller filename=app/Livewire/JobBatching.php
+```php tab=View filename=resources/views/livewire/job-batching.blade.php
 <?php
 
 namespace App\Livewire;
@@ -19,10 +19,13 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\LazyCollection;
 use Livewire\Attributes\Computed;
-use Livewire\Component;
+use Livewire\Attributes\Title;
+use Livewire\Volt\Component;
 use Livewire\WithPagination;
 
-class JobBatching extends Component
+new
+#[Title('Job Batching - Larva Interactions')]
+class extends Component
 {
     use WithPagination;
 
@@ -100,15 +103,15 @@ class JobBatching extends Component
         }
     }
 
-    public function render()
+    public function with(): array
     {
-        return view('livewire.job-batching')
-        ->title('Job Batching');
+        return [
+            'md_content' => markdown_convert(resource_path('docs/job-batching.md'))
+        ];
     }
 }
-```
+?>
 
-```blade tab=View filename=resources/views/livewire/job-batching.blade.php
 <div x-data="{ batchFinished: $wire.entangle('batchFinished').live,
         batchCancelled: $wire.entangle('batchCancelled').live,
         batchProgress: $wire.entangle('batchProgress').live,
@@ -123,7 +126,7 @@ class JobBatching extends Component
     <a href="/" class="underline text-blue-500">Back</a>
 
     <h1 class="text-2xl">Job Batching</h1>
-
+    {!! $md_content !!}
     <p>This example shows how to implements Job Batching with Livewire and AlpineJS using <a class="underline text-blue-500" href="https://blog.majestic.com/development/majestic-million-csv-daily/">Majestic Million data.</a></p>
     <p>The CSV file stored in <code class="bg-gray-100 p-1 inline-block rounded">csvfile</code> directory.</p>
 

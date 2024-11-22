@@ -4,21 +4,22 @@
 ```php tab=Route filename=routes/web.php
 <?php
 
-use App\Livewire\Datatable;
+use Livewire\Volt\Volt;
 
-Route::get('/datatable', Datatable::class);
+Volt::route('/datatable', 'datatable');
 ```
 
-```php tab=Controller filename=app/Livewire/Datatable.php
+```php tab=View filename=resources/views/livewire/datatable.blade.php
 <?php
 
-namespace App\Livewire;
-
 use Illuminate\Support\Facades\DB;
-use Livewire\Component;
+use Livewire\Attributes\Title;
+use Livewire\Volt\Component;
 use Livewire\WithPagination;
 
-class Datatable extends Component
+new
+#[Title('Datatable - Larva Interactions')]
+class extends Component
 {
     use WithPagination;
 
@@ -32,7 +33,7 @@ class Datatable extends Component
         }
     }
 
-    public function render()
+    public function with(): array
     {
         $employees = DB::table('employees');
 
@@ -44,18 +45,18 @@ class Datatable extends Component
                 ->orWhere('age', 'like', '%'.$search.'%');
         }
 
-        return view('livewire.datatable', [
+        return [
+            'md_content' => markdown_convert(resource_path('docs/datatable.md')),
             'employees' => $employees->paginate($this->perPage),
-        ])
-        ->title('Datatable');
+        ];
     }
 }
-```
+?>
 
-```blade tab=View filename=resources/views/livewire/datatable.blade.php
 <div>
     <a href="/" class="underline text-blue-500">Back</a>
     <h1 class="text-2xl">Datatable</h1>
+    {!! $md_content !!}
     <h2 class="text-xl">Basic Datatable</h2>
     <p>This demo shows example of basic Datatable using Livewire</p>
     <div class="flex items-center gap-4 my-4">
