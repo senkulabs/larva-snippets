@@ -4,22 +4,23 @@
 ```php tab=Route filename=routes/web.php
 <?php
 
-use App\Livewire\Form;
+use Livewire\Volt\Volt;
 
-Route::get('/form', Form::class);
+Volt::route('/form', 'form');
 ```
 
-```php tab=Controller filename=app/Livewire/Form.php
+```blade tab=View filename=resources/views/livewire/form.blade.php
 <?php
 
-namespace App\Livewire;
-
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Form as LivewireForm;
-use Livewire\Component;
+use Livewire\Volt\Component;
 
 class HumanForm extends LivewireForm
 {
+    #[Validate('required')]
+    public $name = '';
     #[Validate('required')]
     public $username = '';
     #[Validate('required|email')]
@@ -40,17 +41,17 @@ class HumanForm extends LivewireForm
     public $dob = '';
 }
 
-class Form extends Component
+new class extends Component
 {
     public HumanForm $form;
     public $data = [];
 
-    public function render()
+    #[Title('Form - Larva Interactions')]
+    public function with(): array
     {
-        return view('livewire.form', [
+        return [
             'content' => markdown_convert(resource_path('docs/form.md'))
-        ])
-        ->title('Form');
+        ];
     }
 
     function save()
@@ -76,15 +77,19 @@ class Form extends Component
         $this->resetValidation();
     }
 }
-```
+?>
 
-```blade tab=View filename=resources/views/livewire/form.blade.php
 <div>
     <a href="/" class="underline text-blue-500">Back</a>
     <h1 class="text-2xl mb-4">Form</h1>
     <p class="mb-4">The root cause of why programmers do CRUD (Create, Read, Update, and Delete)</p>
     {!! $content !!}
     <form wire:submit="save" x-data="{ showPassword: false, showPasswordConfirmation: false }">
+        <div class="mb-4">
+            <label for="name" class="block">Name</label>
+            <input id="name" type="text" wire:model="form.name" placeholder="Name" class="block w-full rounded">
+            @error('form.name') <span class="text-red-500">{{ $message }}</span> @enderror
+        </div>
         <div class="mb-4">
             <label for="username" class="block">Username</label>
             <input id="username" type="text" wire:model="form.username" placeholder="Username" class="block w-full rounded">

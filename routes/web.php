@@ -1,20 +1,21 @@
 <?php
 
 use App\Livewire\Datatable;
-use App\Livewire\Form;
 use App\Livewire\JobBatching;
-use App\Livewire\ThirdParty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Volt\Volt;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/third-party', ThirdParty::class);
-Route::get('/form', Form::class);
+Route::get('/third-party', function () {
+    return view('third-party');
+});
+Volt::route('/form', 'form');
 Route::get('/datatable', Datatable::class);
 Route::get('/job-batching', JobBatching::class);
 

@@ -1,9 +1,83 @@
+<?php
+
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
+use Livewire\Form as LivewireForm;
+use Livewire\Volt\Component;
+
+class HumanForm extends LivewireForm
+{
+    #[Validate('required')]
+    public $name = '';
+    #[Validate('required')]
+    public $username = '';
+    #[Validate('required|email')]
+    public $email = '';
+    #[Validate('required|confirmed|min:8')]
+    public $password = '';
+    public $password_confirmation = '';
+    #[Validate('required')]
+    public $gender = '';
+    #[Validate('required')]
+    public $hobbies = [];
+    public $otherHobby = '';
+    #[Validate('required')]
+    public $continent = '';
+    #[Validate('required')]
+    public $bio = '';
+    #[Validate('required')]
+    public $dob = '';
+}
+
+new class extends Component
+{
+    public HumanForm $form;
+    public $data = [];
+
+    #[Title('Form - Larva Interactions')]
+    public function with(): array
+    {
+        return [
+            'content' => markdown_convert(resource_path('docs/form.md'))
+        ];
+    }
+
+    function save()
+    {
+        $this->validate();
+        // Add other hobby to hobbies
+        array_push($this->form->hobbies, $this->form->otherHobby);
+        $this->data = array_merge([], [
+            'username' => $this->form->username,
+            'email' => $this->form->email,
+            'gender' => ucfirst($this->form->gender),
+            'continent' => ucwords($this->form->continent),
+            'dob' => \Carbon\Carbon::parse($this->form->dob)->locale('en_US')->isoFormat('MMMM DD YYYY'),
+            'hobbies' => implode(', ', $this->form->hobbies),
+            'bio' => $this->form->bio
+        ]);
+    }
+
+    function clean()
+    {
+        // Clean the form
+        $this->resetErrorBag();
+        $this->resetValidation();
+    }
+}
+?>
+
 <div>
     <a href="/" class="underline text-blue-500">Back</a>
     <h1 class="text-2xl mb-4">Form</h1>
     <p class="mb-4">The root cause of why programmers do CRUD (Create, Read, Update, and Delete)</p>
     {!! $content !!}
     <form wire:submit="save" x-data="{ showPassword: false, showPasswordConfirmation: false }">
+        <div class="mb-4">
+            <label for="name" class="block">Name</label>
+            <input id="name" type="text" wire:model="form.name" placeholder="Name" class="block w-full rounded">
+            @error('form.name') <span class="text-red-500">{{ $message }}</span> @enderror
+        </div>
         <div class="mb-4">
             <label for="username" class="block">Username</label>
             <input id="username" type="text" wire:model="form.username" placeholder="Username" class="block w-full rounded">
