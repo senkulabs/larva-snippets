@@ -29,12 +29,13 @@ class HumanForm extends LivewireForm
     public $dob = '';
 }
 
-new class extends Component
+new
+#[Title('Form - Larva Interactions')]
+class extends Component
 {
     public HumanForm $form;
     public $data = [];
 
-    #[Title('Form - Larva Interactions')]
     public function with(): array
     {
         return [
