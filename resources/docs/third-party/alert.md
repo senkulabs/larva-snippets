@@ -11,14 +11,13 @@ Route::get('/third-party', function () {
 
 ```html tab=View filename=resources/views/third-party.blade.php
 <x-app-layout>
-    <div>
-        <a href="/" class="underline text-blue-500">Back</a>
-        <h1 class="text-2xl mb-4">Third Party</h1>
-        <livewire:third-party.alert /> <!-- [tl! add] -->
-        <livewire:third-party.select/>
-        <livewire:third-party.text-editor/>
-        <livewire:third-party.nested/>
-    </div>
+    <x-slot name="title">Third Party - Larva Interactions</x-slot>
+    <a href="/" class="underline text-blue-500">Back</a>
+    <h1 class="text-2xl mb-4">Third Party</h1>
+    <livewire:third-party.alert /> <!-- [tl! add] -->
+    <livewire:third-party.select/>
+    <livewire:third-party.text-editor/>
+    <livewire:third-party.nested/>
 </x-app-layout>
 ```
 
