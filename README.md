@@ -1,6 +1,6 @@
-# Larva Interactions
+# Larva Snippets
 
-Web interactions use Larva stack.
+Reusable pieces of Larva stack.
 
 > Larva = Laravel + Livewire + Tailwind + Alpine
 
@@ -24,7 +24,7 @@ pnpm i
 pnpm run dev
 ```
 
-## Interactions
+## Snippets
 
 - Third-party library
     - Select (Tom Select)

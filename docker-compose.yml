@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    image: senkustream/larva-interactions:local
+    image: senkustream/larva-snippets:local
     ports:
       - 8080:80
     environment:
@@ -15,14 +15,14 @@ services:
     command: "redis-server --appendonly yes"
 
   queue:
-    image: senkustream/larva-interactions:local
+    image: senkustream/larva-snippets:local
     command: ["php", "/var/www/html/artisan", "queue:work", "--tries=3"]
     environment:
       - SSL_MODE=off
       - PHP_FPM_POOL_NAME=larva_queue
 
   horizon:
-    image: senkustream/larva-interactions:local
+    image: senkustream/larva-snippets:local
     command: ["php", "/var/www/html/artisan", "horizon"]
     environment:
       - SSL_MODE=off

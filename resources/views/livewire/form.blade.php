@@ -30,7 +30,7 @@ class HumanForm extends LivewireForm
 }
 
 new
-#[Title('Form - Larva Interactions')]
+#[Title('Form - Larva Snippets')]
 class extends Component
 {
     public HumanForm $form;

@@ -46,7 +46,7 @@ new class extends Component
     public HumanForm $form;
     public $data = [];
 
-    #[Title('Form - Larva Interactions')]
+    #[Title('Form - Larva Snippets')]
     public function with(): array
     {
         return [

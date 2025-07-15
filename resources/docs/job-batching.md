@@ -24,7 +24,7 @@ use Livewire\Volt\Component;
 use Livewire\WithPagination;
 
 new
-#[Title('Job Batching - Larva Interactions')]
+#[Title('Job Batching - Larva Snippets')]
 class extends Component
 {
     use WithPagination;

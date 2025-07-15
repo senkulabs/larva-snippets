@@ -11,7 +11,7 @@ Route::get('/third-party', function () {
 
 ```html tab=View filename=resources/views/third-party.blade.php
 <x-app-layout>
-    <x-slot name="title">Third Party - Larva Interactions</x-slot>
+    <x-slot name="title">Third Party - Larva Snippets</x-slot>
     <a href="/" class="underline text-blue-500">Back</a>
     <h1 class="text-2xl mb-4">Third Party</h1>
     <livewire:third-party.alert /> 

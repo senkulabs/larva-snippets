@@ -18,7 +18,7 @@ use Livewire\Volt\Component;
 use Livewire\WithPagination;
 
 new
-#[Title('Datatable - Larva Interactions')]
+#[Title('Datatable - Larva Snippets')]
 class extends Component
 {
     use WithPagination;
