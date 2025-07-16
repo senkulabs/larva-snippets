@@ -1,9 +1,13 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
 
-@import '_code.css';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
 
-@import "tailwindcss/utilities";
+@source '_code.css';
 
 /** These are specific for the tag that will be added to the rich text content */
 .trix-content .attachment-gallery > .attachment,
