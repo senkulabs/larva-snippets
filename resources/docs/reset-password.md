@@ -1,3 +1,15 @@
+<details class="my-4">
+    <summary>Let me see the code 👀</summary>
+
+```php tab=Route filename=routes/web.php
+<?php
+
+use Livewire\Volt\Volt;
+
+Volt::route('/reset-password', 'reset-password');
+```
+
+```php tab=View filename=resources/views/livewire/reset-password.blade.php
 <?php
 
 use Illuminate\Validation\Rules\Password;
@@ -30,19 +42,11 @@ class extends Component {
         $this->validate();
         $this->reset();
     }
-
-    function with(): array
-    {
-        return [
-            'content' => markdown_convert(resource_path('docs/reset-password.md'))
-        ];
-    }
 }; ?>
 
 <div>
     <a href="/" class="underline text-blue-500">Back</a>
     <h1 class="text-2xl mb-4">Reset Password</h1>
-    {!! $content !!}
     <form wire:submit="submit" x-data="{ showPassword: false, showPasswordConfirmation: false }">
         <div class="flex flex-col space-y-4 md:grid md:grid-cols-2 md:gap-4">
             <div class="mb-4">
@@ -92,3 +96,5 @@ class extends Component {
         </button>
     </form>
 </div>
+```
+</details>
