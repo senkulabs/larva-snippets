@@ -8,30 +8,23 @@ Reusable pieces of Larva stack.
 
 Make sure you use PHP version 8.3 or higher and NodeJS version 20 or higher.
 
-```bash
-# First tab terminal
+```sh
 cp .env.example .env
-composer install
+composer install && pnpm install
 php artisan key:generate
-touch database/database.sqlite
 php artisan migrate
 php artisan storage:link
-```
-
-```bash
-# Second tab terminal
-pnpm i
-pnpm run dev
+composer run dev
 ```
 
 ## Snippets
 
-- Third-party library
-    - Select (Tom Select)
-    - Alert (Sweet Alert)
-    - Text Area (Trix Editor)
-    - Nested Sortable
 - Form
+- Reset Password
+- Alert (Sweet Alert)
+- Trix Editor
+- Nested Sortable
+- Select (Tom Select)    
 - Datatable
 - Job Batching
 
@@ -43,6 +36,8 @@ In order to make Job Batching works, I use queue with Redis and job batching fea
 
 Brief steps:
 
-- You already install Redis in your computer.
+- You must install Redis in your computer.
 - Run `redis-server` in tab terminal.
-- Run `php artisan queue:work` to start queue.
+
+## Torchlight Token
+
