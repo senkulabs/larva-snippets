@@ -1,3 +1,13 @@
+<details class="my-4">
+    <summary>Let me see the code 👀</summary>
+    
+```php tab=Route filename=routes/web.php
+<?php
+
+Volt::route('/alert', 'alert');
+```
+
+```php tab=Volt filename=resources/views/livewire/alert.blade.php
 <?php
 
 use Livewire\Attributes\On;
@@ -5,13 +15,6 @@ use Livewire\Volt\Component;
 
 new class extends Component {
     public $visible = true;
-
-    public function with(): array
-    {
-        return [
-            'md_content' => markdown_convert(resource_path('docs/third-party/alert.md'))
-        ];
-    }
 
     #[On('destroy')]
     function destroy()
@@ -60,8 +63,8 @@ new class extends Component {
 @endpush
 
 <div>
-    <h2 class="text-xl mb-4">Alert with Sweet Alert</h2>
-    {!! $md_content !!}
+    <a href="/" class="underline text-blue-500">Back</a>
+    <h1 class="text-xl mb-4">Alert with Sweet Alert</h1>
     @if ($visible)
         <div class="flex items-center gap-2 mb-4">
             <p>Delete me and I will say good bye!</p>
@@ -71,3 +74,5 @@ new class extends Component {
         <p class="mb-4">Good bye! 👋🏼</p>
     @endif
 </div>
+```
+</details>

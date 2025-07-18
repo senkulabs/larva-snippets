@@ -15,6 +15,8 @@ Route::get('/third-party', function () {
 });
 Volt::route('/form', 'form');
 Volt::route('/reset-password', 'reset-password');
+Volt::route('/alert', 'alert');
+Volt::route('/select', 'select');
 Volt::route('/datatable', 'datatable');
 Volt::route('/job-batching', 'job-batching');
 

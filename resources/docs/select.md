@@ -1,3 +1,13 @@
+<details class="my-4">
+    <summary>Let me see the code 👀</summary>
+    
+```php tab=Route filename=routes/web.php
+<?php
+
+Volt::route('/select', 'select');
+```
+
+```php tab=Volt filename=resources/views/livewire/select.blade.php
 <?php
 
 use Livewire\Volt\Component;
@@ -10,7 +20,7 @@ new class extends Component {
     public function with(): array
     {
         return [
-            'md_content' => markdown_convert(resource_path('docs/third-party/select.md')),
+            'md_content' => markdown_convert(resource_path('docs/select.md')),
             'options' => [
                 [
                     'id' => '1',
@@ -126,3 +136,5 @@ new class extends Component {
     </div>
     <p class="mb-4">Selected options: {{ @json_encode($selectedOptions) }}</p>
 </div>
+```
+</details>
