@@ -64,7 +64,8 @@ class extends Component {
             });
         }
     }">
-    <h2 class="text-xl mb-4">Text Area with Trix Editor</h2>
+    <a href="/" class="underline text-blue-500">Back</a>
+    <h1 class="text-xl mb-4">Text Area with Trix Editor</h1>
     {!! $md_content !!}
     <form class="mb-4" wire:submit="submit">
         <div wire:ignore
