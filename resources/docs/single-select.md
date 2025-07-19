@@ -7,12 +7,15 @@
 Volt::route('/single-select', 'single-select');
 ```
 
-```php tab=Volt filename=resources/views/livewire/single-select.blade.php
+```php tab=Component filename=resources/views/livewire/single-select.blade.php
 <?php
 
+use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new
+#[Title('Single Select - Larva Snippets')]
+class extends Component {
 
     public $selectedOption = '1';
 
@@ -92,6 +95,7 @@ new class extends Component {
         </select>
     </div>
     <p class="mb-4">Selected option: {{ @json_encode($selectedOption) }}</p>
+    <button class="border border-gray-300 p-2 rounded-lg cursor-pointer" wire:click="clearSelectedOption">Clear</button>
 </div>
 ```
 </details>

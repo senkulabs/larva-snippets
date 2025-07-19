@@ -1,8 +1,11 @@
 <?php
 
+use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new
+#[Title('Multi Select - Larva Snippets')]
+class extends Component {
 
     public $selectedOptions = ['3', '4'];
 

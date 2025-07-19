@@ -7,12 +7,15 @@
 Volt::route('/multi-select', 'multi-select');
 ```
 
-```php tab=Volt filename=resources/views/livewire/multi-select.blade.php
+```php tab=Component filename=resources/views/livewire/multi-select.blade.php
 <?php
 
+use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new 
+#[Title('Multi Select - Larva Snippets')]
+class extends Component {
 
     public $selectedOptions = ['3', '4'];
 
