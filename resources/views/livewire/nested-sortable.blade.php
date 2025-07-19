@@ -1,35 +1,21 @@
-<details class="my-4">
-    <summary>Let me see the code 👀</summary>
-    
-```php tab=Route filename=routes/web.php
-<?php
-
-Route::get('/third-party', function () {
-    return view('third-party');
-});
-```
-
-```html tab=View filename=resources/views/third-party.blade.php
-<x-app-layout>
-    <x-slot name="title">Third Party - Larva Snippets</x-slot>
-    <a href="/" class="underline text-blue-500">Back</a>
-    <h1 class="text-2xl mb-4">Third Party</h1>
-    <livewire:third-party.alert /> 
-    <livewire:third-party.select/>
-    <livewire:third-party.text-editor/>
-    <livewire:third-party.nested/> <!-- [tl! add] -->
-</x-app-layout>
-```
-
-```php tab=Volt filename=resources/views/livewire/third-party/nested.blade.php
 <?php
 
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new
+#[Title('Nested Sortable - Larva Snippets')]
+class extends Component {
     public $sortableData;
     public $sortableItem;
+
+    public function with(): array
+    {
+        return [
+            'md_content' => markdown_convert(resource_path('docs/nested-sortable.md')),
+        ];
+    }
 
     #[On('set-data')]
     function setSortableData($data)
@@ -48,7 +34,7 @@ new class extends Component {
     }
 }; ?>
 
-@push('styles')
+@assets
 <style>
     /* Nested sortable style */
     ul {
@@ -90,10 +76,10 @@ new class extends Component {
         background-color: #b3b3b3;
     }
 </style>
-@endpush
-
-@push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+@endassets
+
+@script
 <script>
     let nestedSortables = Array.from(document.querySelectorAll('.nested-sortable'));
     for (let i = 0; i < nestedSortables.length; i++) {
@@ -104,8 +90,7 @@ new class extends Component {
             swapThreshold: 0.65,
             onEnd: function (evt) {
                 let newData = JSON.stringify(serialize(root));
-                console.log(newData);
-                Livewire.dispatch('set-data', { data: newData });
+                $wire.dispatch('set-data', { data: newData });
             }
         });
     }
@@ -138,11 +123,13 @@ new class extends Component {
         </li>`));
     });
 </script>
-@endpush
+@endscript
 
 <div>
-<h2 class="text-xl mb-4">Nested Sortable</h2>
-    <p class="mb-4">Usually, I use nested sortable to display tree menu then drag and drop menu position. Imagine you build dynamic menus for your site.</p>
+    <a href="/" class="underline text-blue-500">Back</a>
+    <h1 class="text-xl mb-4">Nested Sortable</h1>
+    <p class="mb-4">Usable for display tree menu then drag and drop menu position. Imagine you build dynamic menus for your site.</p>
+    {!! $md_content !!}
     <form class="flex gap-2" wire:submit.prevent="submitSortable">
         <input type="text" wire:model="sortableItem" placeholder="Insert an item" class="flex-1 rounded">
         <button type="submit" class="bg-blue-500 p-2 rounded text-white">Submit</button>
@@ -160,5 +147,3 @@ new class extends Component {
     <p>Please drag and drop the list above to see updated list.</p>
     @endif
 </div>
-```
-</details>
