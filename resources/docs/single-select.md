@@ -4,10 +4,10 @@
 ```php tab=Route filename=routes/web.php
 <?php
 
-Volt::route('/select', 'select');
+Volt::route('/single-select', 'single-select');
 ```
 
-```php tab=Volt filename=resources/views/livewire/select.blade.php
+```php tab=Volt filename=resources/views/livewire/single-select.blade.php
 <?php
 
 use Livewire\Volt\Component;
@@ -15,12 +15,11 @@ use Livewire\Volt\Component;
 new class extends Component {
 
     public $selectedOption = '1';
-    public $selectedOptions = ['3', '4'];
 
     public function with(): array
     {
         return [
-            'md_content' => markdown_convert(resource_path('docs/select.md')),
+            'md_content' => markdown_convert(resource_path('docs/single-select.md')),
             'options' => [
                 [
                     'id' => '1',
@@ -46,30 +45,23 @@ new class extends Component {
     {
         $this->selectedOption = '';
     }
-
-    function clearSelectedOptions()
-    {
-        $this->selectedOptions = [];
-    }
 }; ?>
 
-@push('styles')
+@assets
 <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
 <style>
     [x-cloak] {
         display: none !important;
     }
 </style>
-@endpush
-
-@push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
-@endpush
+@endassets
 
 <div>
-    <h2 class="text-xl mb-4">Select with Tom Select</h2>
+    <a href="/" class="underline text-blue-500">Back</a>
+    <h1 class="text-xl mb-4">Single Select with Tom Select</h1>
+
     {!! $md_content !!}
-    <h3 class="text-lg">Single option</h3>
     <div wire:ignore>
         <select x-data="{
             tomSelectInstance: null,
@@ -100,41 +92,6 @@ new class extends Component {
         </select>
     </div>
     <p class="mb-4">Selected option: {{ @json_encode($selectedOption) }}</p>
-
-    <h3 class="text-lg">Multiple options</h3>
-    <div wire:ignore>
-        <select x-data="{
-            tomSelectInstance: null,
-            options: {{ collect($options) }},
-            items: $wire.entangle('selectedOptions').live
-        }"
-        x-init="tomSelectInstance = new TomSelect($refs.select, {
-            valueField: 'id',
-            labelField: 'name',
-            searchField: 'name',
-            options: options,
-            items: items,
-            maxItems: 2,
-            onItemAdd: function () {
-                this.setTextboxValue('');
-                this.refreshOptions();
-            }
-        }); $watch('items', (value, oldValue) => {
-            const result = JSON.parse(JSON.stringify(value));
-            if (result.length === 0) {
-                tomSelectInstance.clear();
-            }
-        })"
-        x-ref="select"
-        x-cloak
-        id="selectedOptions"
-        wire:model.live="selectedOptions"
-        multiple
-        autocomplete="off">
-
-        </select>
-    </div>
-    <p class="mb-4">Selected options: {{ @json_encode($selectedOptions) }}</p>
 </div>
 ```
 </details>

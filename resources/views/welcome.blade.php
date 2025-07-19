@@ -51,7 +51,8 @@
                 <li><a href="/form">Form</a></li>
                 <li><a href="/reset-password">Reset Password</a></li>
                 <li><a href="/alert">Alert</a></li>
-                <li><a href="/select">Select</a></li>
+                <li><a href="/single-select">Single Select</a></li>
+                <li><a href="/multi-select">Multi Select</a></li>
                 <li><a href="/third-party">Third Party</a></li>
                 <li><a href="/datatable">Datatable</a></li>
                 <li><a href="/job-batching">Job Batching</a></li>

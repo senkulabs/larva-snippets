@@ -1,16 +1,25 @@
+<details class="my-4">
+    <summary>Let me see the code 👀</summary>
+    
+```php tab=Route filename=routes/web.php
+<?php
+
+Volt::route('/multi-select', 'multi-select');
+```
+
+```php tab=Volt filename=resources/views/livewire/multi-select.blade.php
 <?php
 
 use Livewire\Volt\Component;
 
 new class extends Component {
 
-    public $selectedOption = '1';
     public $selectedOptions = ['3', '4'];
 
-    public function with(): array
+    function with(): array
     {
         return [
-            'md_content' => markdown_convert(resource_path('docs/select.md')),
+            'md_content' => markdown_convert(resource_path('docs/multi-select.md')),
             'options' => [
                 [
                     'id' => '1',
@@ -32,11 +41,6 @@ new class extends Component {
         ];
     }
 
-    function clearSelectedOption()
-    {
-        $this->selectedOption = '';
-    }
-
     function clearSelectedOptions()
     {
         $this->selectedOptions = [];
@@ -55,42 +59,8 @@ new class extends Component {
 
 <div>
     <a href="/" class="underline text-blue-500">Back</a>
-    <h1 class="text-xl mb-4">Select with Tom Select</h1>
-    
+    <h1 class="text-xl">Multi Select with Tom Select</h1>
     {!! $md_content !!}
-    <h2 class="text-lg">Single option</h2>
-    <div wire:ignore>
-        <select x-data="{
-            tomSelectInstance: null,
-            options: {{ collect($options) }},
-            items: $wire.entangle('selectedOption').live
-        }"
-        x-init="tomSelectInstance = new TomSelect($refs.select, {
-            valueField: 'id',
-            labelField: 'name',
-            searchField: 'name',
-            options: options,
-            items: items,
-            onItemAdd: function () {
-                this.setTextboxValue('');
-            }
-        }); $watch('items', (value, oldValue) => {
-            const result = JSON.parse(JSON.stringify(value));
-            if (result.length === 0) {
-                tomSelectInstance.clear();
-            }
-        });"
-        x-ref="select"
-        x-cloak
-        id="selectedOption"
-        wire:model.live="selectedOption"
-        autocomplete="off">
-
-        </select>
-    </div>
-    <p class="mb-4">Selected option: {{ @json_encode($selectedOption) }}</p>
-
-    <h2 class="text-lg">Multiple options</h2>
     <div wire:ignore>
         <select x-data="{
             tomSelectInstance: null,
@@ -124,4 +94,7 @@ new class extends Component {
         </select>
     </div>
     <p class="mb-4">Selected options: {{ @json_encode($selectedOptions) }}</p>
+    <button class="border border-gray-300 p-2 rounded-lg cursor-pointer" wire:click="clearSelectedOptions">Clear</button>
 </div>
+```
+</details>
