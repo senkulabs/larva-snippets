@@ -28,10 +28,13 @@ class extends Component {
     }
 }; ?>
 
-@push('scripts')
+@assets
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" crossorigin="anonymous"></script>
+@endassets
+
+@script
 <script>
-    function confirmDestroy(el) {
+    window.confirmDestroy = function(el) {
         swal({
             title: 'Warning!',
             text: el.getAttribute('data-message'),
@@ -46,7 +49,7 @@ class extends Component {
                     closeOnClickOutside: false,
                     button: false
                 });
-                window.Livewire.dispatch('destroy');
+                $wire.dispatch('destroy');
             } else {
                 swal('Your data still saved!')
             }
@@ -60,7 +63,7 @@ class extends Component {
         });
     })
 </script>
-@endpush
+@endscript
 
 <div>
     <a href="/" class="underline text-blue-500">Back</a>
