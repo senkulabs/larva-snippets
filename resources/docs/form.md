@@ -9,7 +9,7 @@ use Livewire\Volt\Volt;
 Volt::route('/form', 'form');
 ```
 
-```blade tab=View filename=resources/views/livewire/form.blade.php
+```blade tab=Component filename=resources/views/livewire/form.blade.php
 <?php
 
 use Livewire\Attributes\Title;

@@ -9,7 +9,7 @@ use Livewire\Volt\Volt;
 Volt::route('/reset-password', 'reset-password');
 ```
 
-```php tab=View filename=resources/views/livewire/reset-password.blade.php
+```php tab=Component filename=resources/views/livewire/reset-password.blade.php
 <?php
 
 use Illuminate\Validation\Rules\Password;

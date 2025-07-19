@@ -9,7 +9,7 @@ use Livewire\Volt\Volt;
 Volt::route('/datatable', 'datatable');
 ```
 
-```php tab=View filename=resources/views/livewire/datatable.blade.php
+```php tab=Component filename=resources/views/livewire/datatable.blade.php
 <?php
 
 use Illuminate\Support\Facades\DB;

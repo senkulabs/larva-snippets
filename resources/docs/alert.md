@@ -7,7 +7,7 @@
 Volt::route('/alert', 'alert');
 ```
 
-```php tab=Volt filename=resources/views/livewire/alert.blade.php
+```php tab=Component filename=resources/views/livewire/alert.blade.php
 <?php
 
 use Livewire\Attributes\On;

@@ -9,7 +9,7 @@ use Livewire\Volt\Volt;
 Volt::route('/job-batching', 'job-batching');
 ```
 
-```php tab=View filename=resources/views/livewire/job-batching.blade.php
+```php tab=Component filename=resources/views/livewire/job-batching.blade.php
 <?php
 
 namespace App\Livewire;
