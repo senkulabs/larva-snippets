@@ -54,7 +54,7 @@
                 <li><a href="/single-select">Single Select</a></li>
                 <li><a href="/multi-select">Multi Select</a></li>
                 <li><a href="/nested-sortable">Nested Sortable</a></li>
-                <li><a href="/third-party">Third Party</a></li>
+                <li><a href="/trix-editor">Trix Editor</a></li>
                 <li><a href="/datatable">Datatable</a></li>
                 <li><a href="/job-batching">Job Batching</a></li>
             </ul>

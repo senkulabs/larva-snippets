@@ -1,20 +1,33 @@
+<details class="my-4">
+    <summary>Let me see the code 👀</summary>
+    
+```php tab=Route filename=routes/web.php
 <?php
 
+Volt::route('/trix-editor', 'trix-editor');
+```
+
+```php tab=Component filename=resources/views/livewire/trix-editor.blade.php
+<?php
+
+use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new
+#[Title('Trix Editor - Larva Snippets')]
+class extends Component {
     public $content = '';
 
     public function with(): array
     {
         return [
-            'md_content' => markdown_convert(resource_path('docs/third-party/text-editor.md')),
+            'md_content' => markdown_convert(resource_path('docs/trix-editor.md')),
         ];
     }
 
-    public function submitEditor()
+    public function submit()
     {
-        // May be add some validation here!
+        // TODO: Add validation here
     }
 
     public function clear()
@@ -23,13 +36,10 @@ new class extends Component {
     }
 }; ?>
 
-@push('styles')
+@assets
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/trix/dist/trix.min.css" crossorigin="anonymous">
-@endpush
-
-@push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/trix/dist/trix.umd.min.js" crossorigin="anonymous"></script>
-@endpush
+@endassets
 
 <div
     x-data="{
@@ -56,7 +66,7 @@ new class extends Component {
     }">
     <h2 class="text-xl mb-4">Text Area with Trix Editor</h2>
     {!! $md_content !!}
-    <form class="mb-4" wire:submit="submitEditor">
+    <form class="mb-4" wire:submit="submit">
         <div wire:ignore
             x-on:trix-change="content = $event.target.value"
             x-on:trix-initialize="$refs.text.editor.loadHTML(content)">
@@ -74,3 +84,5 @@ new class extends Component {
         {!! $content !!}
     </form>
 </div>
+```
+</details>

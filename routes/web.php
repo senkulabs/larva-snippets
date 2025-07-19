@@ -19,6 +19,7 @@ Volt::route('/alert', 'alert');
 Volt::route('/single-select', 'single-select');
 Volt::route('/multi-select', 'multi-select');
 Volt::route('/nested-sortable', 'nested-sortable');
+Volt::route('/trix-editor', 'trix-editor');
 Volt::route('/datatable', 'datatable');
 Volt::route('/job-batching', 'job-batching');
 
