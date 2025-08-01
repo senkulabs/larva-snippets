@@ -10,7 +10,7 @@
         "laravel/tinker": "^2.9",
         "laravel/unfenced": "dev-main",
         "league/commonmark": "^2.5",
-        "livewire/livewire": "^3.5",
+        "livewire/livewire": "^3.6.4",
         "livewire/volt": "^1.6",
         "torchlight/torchlight-commonmark": "dev-main",
         "torchlight/torchlight-laravel": "^0.6.0"
