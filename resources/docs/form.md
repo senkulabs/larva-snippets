@@ -56,6 +56,7 @@ class extends Component
         // Add other hobby to hobbies
         array_push($this->form->hobbies, $this->form->otherHobby);
         $this->data = array_merge([], [
+            'name' => $this->form->name,
             'email' => $this->form->email,
             'gender' => ucfirst($this->form->gender),
             'region' => $this->form->region,
