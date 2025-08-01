@@ -23,9 +23,6 @@ class HumanForm extends LivewireForm
     public $name = '';
     #[Validate('required|email')]
     public $email = '';
-    #[Validate('required|confirmed|min:8')]
-    public $password = '';
-    public $password_confirmation = '';
     #[Validate('required')]
     public $gender = '';
     #[Validate('required')]
@@ -39,12 +36,13 @@ class HumanForm extends LivewireForm
     public $dob = '';
 }
 
-new class extends Component
+new
+#[Title('Form - Larva Snippets')]
+class extends Component
 {
     public HumanForm $form;
     public $data = [];
 
-    #[Title('Form - Larva Snippets')]
     public function with(): array
     {
         return [
@@ -65,11 +63,7 @@ new class extends Component
             'hobbies' => implode(', ', $this->form->hobbies),
             'bio' => $this->form->bio
         ]);
-    }
-
-    function clean()
-    {
-        $this->reset();
+        $this->resetExcept(['data']);
     }
 }
 ?>
@@ -79,7 +73,7 @@ new class extends Component
     <h1 class="text-2xl mb-4">Form</h1>
     <p class="mb-4">The root cause of why programmers do CRUD (Create, Read, Update, and Delete)</p>
     {!! $content !!}
-    <form wire:submit="save">
+    <form wire:submit="save" x-data="{ showPassword: false, showPasswordConfirmation: false }">
         <div class="mb-4">
             <label for="name" class="block">Name</label>
             <input id="name" type="text" wire:model="form.name" placeholder="Name" class="block w-full rounded">
@@ -159,7 +153,7 @@ new class extends Component
             <input id="dob" wire:model="form.dob" type="date" class="block w-full rounded">
             @error('form.dob') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
-        <button class="bg-blue-500 p-2 rounded text-white">Submit</button>
+        <button class="bg-blue-500 p-2 rounded text-white cursor-pointer">Submit</button>
     </form>
 
     @if (!empty($data))

@@ -9,8 +9,6 @@ class HumanForm extends LivewireForm
 {
     #[Validate('required')]
     public $name = '';
-    #[Validate('required')]
-    public $username = '';
     #[Validate('required|email')]
     public $email = '';
     #[Validate('required')]
@@ -46,7 +44,6 @@ class extends Component
         // Add other hobby to hobbies
         array_push($this->form->hobbies, $this->form->otherHobby);
         $this->data = array_merge([], [
-            'username' => $this->form->username,
             'email' => $this->form->email,
             'gender' => ucfirst($this->form->gender),
             'region' => $this->form->region,
@@ -54,7 +51,7 @@ class extends Component
             'hobbies' => implode(', ', $this->form->hobbies),
             'bio' => $this->form->bio
         ]);
-        $this->reset();
+        $this->resetExcept(['data']);
     }
 }
 ?>
@@ -69,11 +66,6 @@ class extends Component
             <label for="name" class="block">Name</label>
             <input id="name" type="text" wire:model="form.name" placeholder="Name" class="block w-full rounded">
             @error('form.name') <span class="text-red-500">{{ $message }}</span> @enderror
-        </div>
-        <div class="mb-4">
-            <label for="username" class="block">Username</label>
-            <input id="username" type="text" wire:model="form.username" placeholder="Username" class="block w-full rounded">
-            @error('form.username') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
         <div class="mb-4">
             <label for="email" class="block">Email</label>
@@ -149,7 +141,7 @@ class extends Component
             <input id="dob" wire:model="form.dob" type="date" class="block w-full rounded">
             @error('form.dob') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
-        <button class="bg-blue-500 p-2 rounded text-white">Submit</button>
+        <button class="bg-blue-500 p-2 rounded text-white cursor-pointer">Submit</button>
     </form>
 
     @if (!empty($data))
