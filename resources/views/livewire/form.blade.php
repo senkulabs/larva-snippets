@@ -1,37 +1,47 @@
 <?php
 
 use Livewire\Attributes\Title;
-use Livewire\Attributes\Validate;
 use Livewire\Form as LivewireForm;
 use Livewire\Volt\Component;
 
-use function Illuminate\Log\log;
-
 class HumanForm extends LivewireForm
 {
-    #[Validate('required')]
     public $name = '';
-    #[Validate('required|email')]
     public $email = '';
-    #[Validate('required')]
     public $gender = '';
-    #[Validate('required')]
     public $hobbies = [];
     public $otherHobby = '';
-    #[Validate('required')]
     public $region = '';
-    #[Validate('required')]
     public $bio = '';
-    #[Validate('required')]
     public $dob = '';
+
+    public function rules()
+    {
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email',
+            'gender' => 'required',
+            'hobbies' => 'required',
+            'region' => 'required',
+            'bio' => 'required',
+            'dob' => 'required'
+        ];
+
+        if (in_array('other', $this->hobbies)) {
+            $rules['otherHobby'] = 'required';
+        }
+
+        return $rules;
+    }
 
     public function store()
     {
         $key = array_search('other', $this->hobbies);
         if ($key !== false) {
             unset($this->hobbies[$key]);
+            array_push($this->hobbies, $this->otherHobby);
         }
-        array_push($this->hobbies, $this->otherHobby);
+
         $result = array_merge([], [
             'name' => $this->name,
             'email' => $this->email,
@@ -123,6 +133,7 @@ class extends Component
                     <input type="text" wire:model="form.otherHobby" placeholder="My hobby is" class="rounded">
                 </label>
                 @error('form.hobbies') <span class="text-red-500">{{ $message }}</span> @enderror
+                @error('form.otherHobby') <span class="text-red-500">{{ $message }}</span> @enderror
             </fieldset>
         </div>
         <div class="mb-4">
