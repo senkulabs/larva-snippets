@@ -17,6 +17,8 @@ use Livewire\Attributes\Validate;
 use Livewire\Form as LivewireForm;
 use Livewire\Volt\Component;
 
+use function Illuminate\Log\log;
+
 class HumanForm extends LivewireForm
 {
     #[Validate('required')]
@@ -34,6 +36,26 @@ class HumanForm extends LivewireForm
     public $bio = '';
     #[Validate('required')]
     public $dob = '';
+
+    public function store()
+    {
+        $key = array_search('other', $this->hobbies);
+        if ($key !== false) {
+            unset($this->hobbies[$key]);
+        }
+        array_push($this->hobbies, $this->otherHobby);
+        $result = array_merge([], [
+            'name' => $this->name,
+            'email' => $this->email,
+            'gender' => ucfirst($this->gender),
+            'region' => $this->region,
+            'dob' => \Carbon\Carbon::parse($this->dob)->locale('en_US')->isoFormat('MMMM DD YYYY'),
+            'hobbies' => implode(', ', $this->hobbies),
+            'bio' => $this->bio
+        ]);
+
+        return $result;
+    }
 }
 
 new
@@ -53,17 +75,7 @@ class extends Component
     function save()
     {
         $this->validate();
-        // Add other hobby to hobbies
-        array_push($this->form->hobbies, $this->form->otherHobby);
-        $this->data = array_merge([], [
-            'name' => $this->form->name,
-            'email' => $this->form->email,
-            'gender' => ucfirst($this->form->gender),
-            'region' => $this->form->region,
-            'dob' => \Carbon\Carbon::parse($this->form->dob)->locale('en_US')->isoFormat('MMMM DD YYYY'),
-            'hobbies' => implode(', ', $this->form->hobbies),
-            'bio' => $this->form->bio
-        ]);
+        $this->data = $this->form->store();
         $this->resetExcept(['data']);
     }
 }
@@ -98,7 +110,7 @@ class extends Component
             @error('form.gender') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
         <div class="mb-4">
-            <fieldset class="block">
+            <fieldset class="block space-y-2">
                 <legend>Hobbies</legend>
                 <label class="block">
                     <input type="checkbox" value="walking" wire:model="form.hobbies"> Walking
@@ -119,14 +131,9 @@ class extends Component
                     <input type="checkbox" value="sing a song" wire:model="form.hobbies"> Sing a Song
                 </label>
                 <label class="block">
-                    <input type="checkbox" value="other" wire:model="form.hobbies"> Other
+                    <input type="checkbox" value="other" wire:model="form.hobbies">
+                    <input type="text" wire:model="form.otherHobby" placeholder="My hobby is" class="rounded">
                 </label>
-                <div>
-                    <label for="">
-                        Please tell me your hobby
-                        <input type="text" wire:model="form.otherHobby" placeholder="My hobby is" class="rounded">
-                    </label>
-                </div>
                 @error('form.hobbies') <span class="text-red-500">{{ $message }}</span> @enderror
             </fieldset>
         </div>
