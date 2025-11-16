@@ -1,10 +1,8 @@
-ARG PHP_VERSION="8.4"
 FROM ubuntu:24.04 AS base
 LABEL fly_launch_runtime="laravel"
 
 # PHP_VERSION needs to be repeated here
 # See https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
-ARG PHP_VERSION
 ENV DEBIAN_FRONTEND=noninteractive \
     COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/composer \
@@ -25,7 +23,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # Prepare base container:
 # 1. Install PHP, Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-ADD .fly/php/packages/${PHP_VERSION}.txt /tmp/php-packages.txt
+ADD .fly/php/packages/8.3.txt /tmp/php-packages.txt
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gnupg2 ca-certificates git-core curl zip unzip \
@@ -33,14 +31,14 @@ RUN apt-get update \
     && ln -sf /usr/bin/vim.tiny /etc/alternatives/vim \
     && ln -sf /etc/alternatives/vim /usr/bin/vim \
     && apt-get -y --no-install-recommends install $(cat /tmp/php-packages.txt) \
-    && ln -sf /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm \
+    && ln -sf /usr/sbin/php-fpm8.3 /usr/sbin/php-fpm \
     && mkdir -p /var/www/html/public && echo "index" > /var/www/html/public/index.php \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # 2. Copy config files to proper locations
 COPY .fly/nginx/ /etc/nginx/
-COPY .fly/fpm/ /etc/php/${PHP_VERSION}/fpm/
+COPY .fly/fpm/ /etc/php/8.3/fpm/
 COPY .fly/supervisor/ /etc/supervisor/
 COPY .fly/entrypoint.sh /entrypoint
 COPY .fly/start-nginx.sh /usr/local/bin/start-nginx
