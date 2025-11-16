@@ -6,7 +6,7 @@ Reusable snippets of Larva and Livewire.
 
 ## How to run?
 
-Make sure you use PHP version 8.3 or higher and NodeJS version 20 or higher.
+Make sure you use PHP version 8.3 or higher and Bun.
 
 ```sh
 cp .env.example .env
