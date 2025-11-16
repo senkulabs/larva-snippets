@@ -1,6 +1,6 @@
 # Larva Snippets
 
-Reusable pieces of Larva stack.
+Reusable snippets of Larva and Livewire.
 
 > Larva = Laravel + Livewire + Tailwind + Alpine
 
@@ -38,6 +38,3 @@ Brief steps:
 
 - You must install Redis in your computer.
 - Run `redis-server` in tab terminal.
-
-## Torchlight Token
-
