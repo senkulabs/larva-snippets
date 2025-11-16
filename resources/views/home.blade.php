@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Larva Snippets</title>
+        <meta name="description" content="Reusable snippets of Laravel and Livewire.">
 
         <!-- Styles -->
         <style>
@@ -33,7 +34,7 @@
     <body>
         <div class="container" style="margin: 0 auto; padding: 1rem;">
             <h1>Larva Snippets</h1>
-            <p>Reuseable pieces of Larva stack.</p>
+            <p>Reuseable snippets of Laravel and Livewire.</p>
             <p><em>Larva = Laravel + Livewire + Tailwind + Alpine</em></p>
             <blockquote class="bg-gray-100"><em>Hold on! ✋</em></blockquote>
             <blockquote><em>"There's a term called TALL (Tailwind + Alpine + Laravel + Livewire) stack! You don't know it!?"</em></blockquote>
@@ -46,7 +47,7 @@
                     <img src="/larva-cartoon.jpg" alt="Larva cartoon">
                 </details>
             </blockquote>
-            <h2>Contents</h2>
+            <h2>Snippets</h2>
             <ul>
                 <li><a href="/form">Form</a></li>
                 <li><a href="/reset-password">Reset Password</a></li>
