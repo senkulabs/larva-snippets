@@ -48,7 +48,11 @@
                 </details>
             </blockquote>
             <h2>Snippets</h2>
-            <p>TBA</p>
+            <ul>
+                <li>
+                    <a href="{{ route('booking-form') }}">Booking Form</a>
+                </li>
+            </ul>
         </div>
     </body>
 </html>
