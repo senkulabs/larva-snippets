@@ -48,17 +48,7 @@
                 </details>
             </blockquote>
             <h2>Snippets</h2>
-            <ul>
-                <li><a href="/form">Form</a></li>
-                <li><a href="/reset-password">Reset Password</a></li>
-                <li><a href="/alert">Alert</a></li>
-                <li><a href="/single-select">Single Select</a></li>
-                <li><a href="/multi-select">Multi Select</a></li>
-                <li><a href="/nested-sortable">Nested Sortable</a></li>
-                <li><a href="/trix-editor">Trix Editor</a></li>
-                <li><a href="/datatable">Datatable</a></li>
-                <li><a href="/job-batching">Job Batching</a></li>
-            </ul>
+            <p>TBA</p>
         </div>
     </body>
 </html>
