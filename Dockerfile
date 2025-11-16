@@ -54,7 +54,7 @@ WORKDIR /var/www/html
 RUN touch database/database.sqlite
 
 # 4. Setup application dependencies
-RUN composer install --optimize-autoloader --no-dev \
+RUN composer install --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader --no-dev \
     && mkdir -p storage/logs \
     && chown -R www-data:www-data /var/www/html \
     && echo "MAILTO=\"\"\n* * * * * www-data /usr/bin/php /var/www/html/artisan schedule:run" > /etc/cron.d/laravel \
