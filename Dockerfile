@@ -1,12 +1,11 @@
-ARG PHP_VERSION=8.3
 FROM ubuntu:24.04 AS base
 LABEL fly_launch_runtime="laravel"
+ARG PHP_VERSION=8.3
 
-RUN echo "PHP Version is : $PHP_VERSION"
+RUN echo "PHP Version is : ${PHP_VERSION}"
 
 # PHP_VERSION needs to be repeated here
 # See https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
-ARG PHP_VERSION
 ENV DEBIAN_FRONTEND=noninteractive \
     COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/composer \
